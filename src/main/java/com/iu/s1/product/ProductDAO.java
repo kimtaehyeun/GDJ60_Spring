@@ -9,10 +9,9 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.iu.s1.util.DBConnection;
+
 @Repository
 public class ProductDAO {
-
-	
 	public Long getProductNum() throws Exception{
 		Connection connection = DBConnection.getConnection();
 		String sql = "SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL";
@@ -67,7 +66,6 @@ public class ProductDAO {
 	//-----------------------------------------
 	//getproductDetail
 	public ProductDTO getproductDetail(ProductDTO productDTO)throws Exception{
-		ProductDTO productDTO2 = null;
 		Connection connection  = DBConnection.getConnection();
 		String sql = "SELECT * FROM PRODUCT WHERE PRODUCT_NUM =?";
 		PreparedStatement st = connection.prepareStatement(sql);
