@@ -20,7 +20,7 @@ public class MemberController {
 		memberDTO.setName("asdf");
 		memberDTO.setPhone("asdf");
 		memberDTO.setEmail("asdf");
-		memberDTO.setAge(12);
+		memberDTO.setAddress("asdf");
 		
 		try {
 			int result =memberService.memberJoin(memberDTO);

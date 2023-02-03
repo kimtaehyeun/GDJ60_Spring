@@ -21,7 +21,7 @@ public class MemberDAO {
 		st.setString(3, memberDTO.getName());
 		st.setString(4, memberDTO.getPhone());
 		st.setString(5, memberDTO.getEmail());
-		st.setInt(6, memberDTO.getAge());
+		st.setString(6, memberDTO.getAddress());
 		int result = st.executeUpdate();
 		DBConnection.disConnection(st, con);
 		return result;
