@@ -22,10 +22,11 @@ public class ProductController {
 		mv.addObject("list", ar);
 		return mv ;
 	}
+	
 	@RequestMapping(value = "add")
-	public void setAddProduct(int result) {
-		ProductDTO productDTO = new  ProductDTO();
-		productDTO.setDetail(null);
+	public void setAddProduct(ProductDTO productDTO, ModelAndView mv) {
+		
+		
 	}
 
 
