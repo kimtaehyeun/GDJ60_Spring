@@ -50,7 +50,7 @@ public class ProductDAO {
 
 
 
-	public int SetAddProduct(ProductDTO productDTO) throws Exception{
+	public int setAddProduct(ProductDTO productDTO) throws Exception{
 		Connection con = DBConnection.getConnection();
 		String sql = "INSERT INTO PRODUCT "
 				+ "VALUES (?, ?, ?, 0.0)";
