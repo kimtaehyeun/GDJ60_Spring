@@ -1,5 +1,8 @@
 package com.iu.s1.member;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +37,13 @@ public class MemberController {
 	@RequestMapping(value = "memberLogin")
 	public void Login() {
 		
+	}
+	@RequestMapping(value="memberList")
+	public ModelAndView getMemberList() throws Exception{
+	List<MemberDTO> ar =memberService.getMemberList();
+	ModelAndView mv = new  ModelAndView();
+	mv.addObject("list", ar);
+	return mv;
 	}
 	@RequestMapping(value = "memberPage")
 	public ModelAndView mypage() {
