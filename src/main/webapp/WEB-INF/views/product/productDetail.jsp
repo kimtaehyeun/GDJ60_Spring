@@ -12,12 +12,13 @@
 	<%
 	ProductDTO productDTO = (ProductDTO) request.getAttribute("dto");
 	%>
-	<h3><%=productDTO.getName()%></h3>
-	<h3><%=productDTO.getDetail()%></h3>
+	<h3><%=productDTO.getProduct_Name()%></h3>
+	<h3><%=productDTO.getProduct_Detail()%></h3>
+	
 
 <hr>
-	<h3>${requestScope.dto.name}</h3>
-	<h3>${requestScope.dto.detail}</h3> 
+	<h3>${requestScope.dto.product_Name}</h3>
+	<h3>${requestScope.dto.product_Detail}</h3> 
 	
 </body>
 </html>

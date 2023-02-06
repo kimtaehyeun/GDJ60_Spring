@@ -6,12 +6,28 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.iu.s1.util.DBConnection;
 
 @Repository
 public class ProductDAO {
+	@Autowired
+	private SqlSession sqlSession;
+	private final String NAMESPACE="com.iu.s1.product.ProductDAO.";
+	
+	//delete
+	public int setProductDelete(Long productNum) throws Exception{
+		return sqlSession.delete(NAMESPACE+"setProductDelete",productNum);
+		
+	}
+	
+	
+	//getMax
 	public Long getProductNum() throws Exception{
 		Connection connection = DBConnection.getConnection();
 		String sql = "SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL";
@@ -25,81 +41,38 @@ public class ProductDAO {
 
 
 	public List<ProductDTO> getProductList()throws Exception{
-		ArrayList<ProductDTO> ar = new ArrayList<ProductDTO>();
-		Connection connection = DBConnection.getConnection();
-
-		String sql = "SELECT PRODUCT_NUM,PRODUCT_NAME, PRODUCT_JUMSU"
-				+ " FROM PRODUCT ORDER BY PRODUCT_JUMSU DESC";
-		PreparedStatement st = connection.prepareStatement(sql);
-		ResultSet rs = st.executeQuery();
-		while(rs.next()) {
-			ProductDTO productDTO = new ProductDTO();
-			productDTO.setNum(rs.getLong("PRODUCT_NUM"));
-			productDTO.setName(rs.getString("PRODUCT_NAME"));
-			productDTO.setJumsu(rs.getDouble("PRODUCT_JUMSU"));
-			ar.add(productDTO);
-		}
-		DBConnection.disConnection(rs, st, connection);
-
-		return ar;
-
+		
+		return sqlSession.selectList(NAMESPACE+"getProductList");
 	}
 
 
 
-
-
-	public int SetAddProduct(ProductDTO productDTO) throws Exception{
-		Connection con = DBConnection.getConnection();
-		String sql = "INSERT INTO PRODUCT "
-				+ "VALUES (?, ?, ?, 0.0)";
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setLong(1, productDTO.getNum());
-		st.setString(2, productDTO.getName());
-		st.setString(3, productDTO.getDetail());
-
-		int result= st.executeUpdate();
-		DBConnection.disConnection(st, con);
-
-		return result;
+	public int setAddProduct(ProductDTO productDTO) throws Exception{
+		
+		return sqlSession.insert(NAMESPACE+"setAddProduct",productDTO);
 	}
 	//-----------------------------------------
 	//getproductDetail
-	public ProductDTO getproductDetail(ProductDTO productDTO)throws Exception{
-		Connection connection  = DBConnection.getConnection();
-		String sql = "SELECT * FROM PRODUCT WHERE PRODUCT_NUM =?";
-		PreparedStatement st = connection.prepareStatement(sql);
-		st.setLong(1, productDTO.getNum());
-		ResultSet rs = st.executeQuery();
-		if(rs.next()) {
-			productDTO = new ProductDTO();
-			productDTO.setNum(rs.getLong("PRODUCT_NUM"));
-			productDTO.setName(rs.getString("PRODUCT_NAME"));
-			productDTO.setDetail(rs.getString("PRODUCT_DETAIL"));
-			productDTO.setJumsu(rs.getDouble("PRODUCT_JUMSU"));
-		}
-		else {
-			productDTO=null;
-		}
-		DBConnection.disConnection(rs, st, connection);
-		return productDTO;
+	public ProductDTO getProductDetail(ProductDTO productDTO)throws Exception{
+		
+		return sqlSession.selectOne(NAMESPACE+"getProductDetail", productDTO);
 	}
 
 
 	public List<ProductOptionDTO> getOptionList() throws Exception{
-		Connection con = DBConnection.getConnection();
+		
 		ArrayList<ProductOptionDTO> ar = new ArrayList<ProductOptionDTO>();
-
+		Connection con = DBConnection.getConnection();
 		String sql = "SELECT OPTION_NUM ,PRODUCT_NUM ,OPTION_NAME ,OPTION_PRICE ,OPTION_JEGO  FROM PRODUCTOPTION";
 		PreparedStatement st = con.prepareStatement(sql);
 		ResultSet rs = st.executeQuery();
 		while(rs.next()) {
 			ProductOptionDTO dto = new ProductOptionDTO();
-			dto.setOptionnum(rs.getLong("OPTION_NUM"));
-			dto.setProductnum(rs.getLong("PRODUCT_NUM"));
-			dto.setOptionname(rs.getString("OPTION_NAME"));
-			dto.setOptionprice(rs.getInt("OPTION_PRICE"));
-			dto.setOptionjego(rs.getInt("OPTION_JEGO"));
+			dto.setOption_Num(rs.getLong("OPTION_NUM"));
+			dto.setProduct_Num(rs.getLong("PRODUCT_NUM"));
+			dto.setOption_Name(rs.getString("OPTION_NAME"));
+			dto.setOption_Price(rs.getInt("OPTION_PRICE"));
+			dto.setOption_Jego(rs.getInt("OPTION_JEGO"));
 			ar.add(dto);
 		}
 		return ar;
@@ -112,10 +85,10 @@ public class ProductDAO {
 		String sql = "INSERT INTO PRODUCTOPTION VALUES "
 				+ "(OPTION_SEQ.NEXTINT,?,?,?,?)";
 		PreparedStatement st = con.prepareStatement(sql);
-		st.setLong(1, optionDTO.getProductnum());
-		st.setString(2, optionDTO.getOptionname());
-		st.setInt(3, optionDTO.getOptionprice());
-		st.setInt(4, optionDTO.getOptionjego());
+		st.setLong(1, optionDTO.getProduct_Num());
+		st.setString(2, optionDTO.getOption_Name());
+		st.setInt(3, optionDTO.getOption_Price());
+		st.setInt(4, optionDTO.getOption_Jego());
 		int result  = st.executeUpdate();
 		DBConnection.disConnection(st, con);
 

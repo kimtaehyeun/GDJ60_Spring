@@ -20,8 +20,7 @@
 	List<ProductDTO> ar = (List<ProductDTO>) request.getAttribute("list");
 	for (ProductDTO productDTO : ar) {
 	%>
-	<h3><%=productDTO.getName()%></h3>
-	<h3><%=productDTO.getNum()%></h3>
+	<h3><%=productDTO.getProduct_Name()%></h3>
 
 
 	<%
@@ -40,9 +39,9 @@
 				<c:forEach items="${list}" var="dto">
 					<tr>
 						<!-- dto는 페이지 영역에 담김 -->
-						<td><a href="./detail?num=${dto.num}">${pageScope.dto.name}</a>
+						<td><a href="./detail?product_Num=${dto.product_Num}">${pageScope.dto.product_Name}</a>
 						</td>
-						<td>${pageScope.dto.num}</td>
+						<td>${pageScope.dto.product_Num}</td>
 					<tr>
 				</c:forEach>
 			</tbody>

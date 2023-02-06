@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iu.s1.product.ProductDAO"><!-- 이 맵퍼를 사용할 클래스 패키지명까지 작성 -->
+	<select id="getProductList" resultType="ProductDTO" statementType="PREPARED">
+		SELECT PRODUCT_NUM, PRODUCT_NAME, PRODUCT_JUMSU
+		FROM PRODUCT
+		ORDER BY PRODUCT_NUM DESC
+		<!-- 세미콜론X -->
+		<!-- namespace  : 맵퍼를 사용할 클래스 패키지명까지 작성-->
+		<!-- id : 맵퍼를 사용할 클래스에서 query문을 사용할 메서드 명 -->
+	</select>
+	
+	<select id="getProductDetail" parameterType="ProductDTO" resultType="ProductDTO">
+	SELECT * FROM PRODUCT WHERE PRODUCT_NUM=#{product_Num}	<!--		#{파라미터getter명(get뺴고다음소문자) }			-->
+	
+	</select>
+	
+	<insert id="setAddProduct" parameterType="ProductDTO">
+	INSERT INTO PRODUCT VALUES(#{product_Num},#{product_Name},#{product_Detail},0.0)
+	
+	</insert>
+<delete id="setDeleteProduct" parameterType="Long">
+DELETE PRODUCT WHERE PRODUCTNUM=#{productNum}<!-- 		#(dao에서 넘겨주는변수명} 		-->
+</delete>
+</mapper>

@@ -10,8 +10,10 @@ public class ProductService {
 	@Autowired
 	private ProductDAO productDAO;
 
+
+	
 	public ProductDTO getProductDetail(ProductDTO productDTO)throws Exception{
-		return productDAO.getproductDetail(productDTO);
+		return productDAO.getProductDetail(productDTO);
 	}
 
 
@@ -24,12 +26,12 @@ public class ProductService {
 	public int setAddProduct(ProductDTO productDTO,List<ProductOptionDTO> ar) throws Exception{
 		//product테이블에 상품등록 및 옵션 등록
 		Long productNum = productDAO.getProductNum();
-		productDTO.setNum(productNum);
-		int result = productDAO.SetAddProduct(productDTO);
+		productDTO.setProduct_Num(productNum);
+		int result = productDAO.setAddProduct(productDTO);
 		if(ar !=null) {
 			if(result>0) {
 				for(ProductOptionDTO productOptionDTO : ar) {
-					productOptionDTO.setOptionnum(productNum);
+					productOptionDTO.setOption_Num(productNum);
 					result = productDAO.setAddoption(productOptionDTO);
 				}
 			}

@@ -6,7 +6,6 @@ public class MemberDTO {
 	private String pw;
 	private String name;
 	private String address;
-	
 	private String phone;
 	private String email;
 	public String getId() {
