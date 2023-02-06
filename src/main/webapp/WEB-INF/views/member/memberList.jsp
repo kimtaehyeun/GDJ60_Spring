@@ -11,9 +11,6 @@
 </head>
 <body>
 <h1>memberList</h1>
-<%ArrayList<ProductDTO> ar =(ArrayList<MemberDTO>) request.getAttribute("list") ;
 
-
-%>
 </body>
 </html>
