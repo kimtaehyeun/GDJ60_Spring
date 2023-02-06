@@ -12,10 +12,10 @@
 	<form action="./productAdd"  method="post">
 	
 		상품명
-		<input type="text"  name="product_Name"   placeholder="상품명 입력"><br>
+		<input type="text"  name="productName"   placeholder="상품명 입력"><br>
 		
 		상품정보<br>
-		<textarea name="product_Detail" rows="4" cols="10"></textarea><br>
+		<textarea name="productDetail" rows="4" cols="10"></textarea><br>
 		
 		<input type="submit" value="등록"> 
 	</form>

@@ -26,7 +26,7 @@ public class ProductService {
 	public int setAddProduct(ProductDTO productDTO,List<ProductOptionDTO> ar) throws Exception{
 		//product테이블에 상품등록 및 옵션 등록
 		Long productNum = productDAO.getProductNum();
-		productDTO.setProduct_Num(productNum);
+		productDTO.setProductNum(productNum);
 		int result = productDAO.setAddProduct(productDTO);
 		if(ar !=null) {
 			if(result>0) {

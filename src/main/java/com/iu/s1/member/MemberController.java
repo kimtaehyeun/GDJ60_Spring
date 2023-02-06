@@ -17,9 +17,9 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@RequestMapping(value = "memberJoin",method = RequestMethod.GET)
-	public void memberJoin() {
+	public String memberJoin() {
 		
-//		return "member/memberJoin";
+		return "member/memberJoin";
 		
 	}
 	@RequestMapping(value = "memberLogin")
@@ -29,6 +29,7 @@ public class MemberController {
 	@RequestMapping(value="memberList")
 	public ModelAndView getMemberList(ModelAndView mv) throws Exception{
 	List<MemberDTO> ar =memberService.getMemberList();
+	System.out.println("a");
 	mv.setViewName("member/memberList");
 	mv.addObject("list", ar);
 	return mv;

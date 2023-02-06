@@ -5,21 +5,21 @@
 
 <mapper namespace="com.iu.s1.product.ProductDAO"><!-- 이 맵퍼를 사용할 클래스 패키지명까지 작성 -->
 	<select id="getProductList" resultType="ProductDTO" statementType="PREPARED">
-		SELECT PRODUCT_NUM, PRODUCT_NAME, PRODUCT_JUMSU
+		SELECT PRODUCTNUM, PRODUCTNAME, PRODUCTJUMSU
 		FROM PRODUCT
-		ORDER BY PRODUCT_NUM DESC
+		ORDER BY PRODUCTNUM DESC
 		<!-- 세미콜론X -->
 		<!-- namespace  : 맵퍼를 사용할 클래스 패키지명까지 작성-->
 		<!-- id : 맵퍼를 사용할 클래스에서 query문을 사용할 메서드 명 -->
 	</select>
 	
 	<select id="getProductDetail" parameterType="ProductDTO" resultType="ProductDTO">
-	SELECT * FROM PRODUCT WHERE PRODUCT_NUM=#{product_Num}	<!--		#{파라미터getter명(get뺴고다음소문자) }			-->
+	SELECT * FROM PRODUCT WHERE PRODUCTNUM=#{productNum}	<!--		#{파라미터getter명(get뺴고다음소문자) }			-->
 	
 	</select>
 	
 	<insert id="setAddProduct" parameterType="ProductDTO">
-	INSERT INTO PRODUCT VALUES(#{product_Num},#{product_Name},#{product_Detail},0.0)
+	INSERT INTO PRODUCT VALUES(#{productNum},#{productName},#{productDetail},0.0)
 	
 	</insert>
 <delete id="setDeleteProduct" parameterType="Long">

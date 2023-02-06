@@ -63,16 +63,16 @@ public class ProductDAO {
 		
 		ArrayList<ProductOptionDTO> ar = new ArrayList<ProductOptionDTO>();
 		Connection con = DBConnection.getConnection();
-		String sql = "SELECT OPTION_NUM ,PRODUCT_NUM ,OPTION_NAME ,OPTION_PRICE ,OPTION_JEGO  FROM PRODUCTOPTION";
+		String sql = "SELECT OPTIONNUM ,PRODUCTNUM ,OPTIONNAME ,OPTIONPRICE ,OPTIONJEGO  FROM PRODUCTOPTION";
 		PreparedStatement st = con.prepareStatement(sql);
 		ResultSet rs = st.executeQuery();
 		while(rs.next()) {
 			ProductOptionDTO dto = new ProductOptionDTO();
-			dto.setOption_Num(rs.getLong("OPTION_NUM"));
-			dto.setProduct_Num(rs.getLong("PRODUCT_NUM"));
-			dto.setOption_Name(rs.getString("OPTION_NAME"));
-			dto.setOption_Price(rs.getInt("OPTION_PRICE"));
-			dto.setOption_Jego(rs.getInt("OPTION_JEGO"));
+			dto.setOption_Num(rs.getLong("OPTIONNUM"));
+			dto.setProduct_Num(rs.getLong("PRODUCTNUM"));
+			dto.setOption_Name(rs.getString("OPTIONNAME"));
+			dto.setOption_Price(rs.getInt("OPTIONPRICE"));
+			dto.setOption_Jego(rs.getInt("OPTIONJEGO"));
 			ar.add(dto);
 		}
 		return ar;
