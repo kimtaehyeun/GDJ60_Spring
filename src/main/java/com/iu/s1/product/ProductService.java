@@ -23,16 +23,16 @@ public class ProductService {
 
 
 	//service ==> dao 로 보내거나 받는 역활
-	public int setAddProduct(ProductDTO productDTO,List<ProductOptionDTO> ar) throws Exception{
+	public int setProductAdd(ProductDTO productDTO,List<ProductOptionDTO> ar) throws Exception{
 		//product테이블에 상품등록 및 옵션 등록
 		Long productNum = productDAO.getProductNum();
 		productDTO.setProductNum(productNum);
-		int result = productDAO.setAddProduct(productDTO);
+		int result = productDAO.setProductAdd(productDTO);
 		if(ar !=null) {
 			if(result>0) {
 				for(ProductOptionDTO productOptionDTO : ar) {
 					productOptionDTO.setOption_Num(productNum);
-					result = productDAO.setAddoption(productOptionDTO);
+					result = productDAO.setAddoption(productOptionDTO);	
 				}
 			}
 		}

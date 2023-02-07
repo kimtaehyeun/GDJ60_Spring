@@ -18,7 +18,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "memberJoin",method = RequestMethod.GET)
 	public String memberJoin() {
-		
 		return "member/memberJoin";
 		
 	}

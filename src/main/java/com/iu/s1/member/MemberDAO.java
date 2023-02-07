@@ -17,15 +17,14 @@ import com.iu.s1.util.DBConnection;
 public class MemberDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESAPCE="com.iu.s1.member.MemberDAO";
+	private final String NAMESAPCE="com.iu.s1.member.MemberDAO.";
 	
 	public int setMemberJoin(MemberDTO memberDTO) throws Exception{
-		return sqlSession.insert(NAMESAPCE+"setAddMember", memberDTO );
+		return sqlSession.insert(NAMESAPCE+"setMemberJoin", memberDTO );
 	}
 	
 	
 	public List<MemberDTO> getMemberList() throws Exception{
-
 		return sqlSession.selectList(NAMESAPCE+"getMemberList");
 	}
 }

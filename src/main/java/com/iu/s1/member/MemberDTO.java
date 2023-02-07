@@ -8,6 +8,7 @@ public class MemberDTO {
 	private String address;
 	private String phone;
 	private String email;
+	
 	public String getId() {
 		return id;
 	}
