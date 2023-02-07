@@ -51,7 +51,7 @@ public class ProductController{
 		//return 값이 없으면 url 주소를 가지고 찾는다.
 	}
 	@RequestMapping(value = "productAdd", method = RequestMethod.POST)
-	public String productAdd(ProductDTO productDTO) throws Exception {
+	public String setProductAdd(ProductDTO productDTO) throws Exception {
 		int result = productService.setProductAdd(productDTO, null);
 		System.out.println(result ==1);
 		return "redirect:./list";

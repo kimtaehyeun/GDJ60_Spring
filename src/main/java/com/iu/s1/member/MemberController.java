@@ -17,9 +17,13 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@RequestMapping(value = "memberJoin",method = RequestMethod.GET)
-	public String memberJoin() {
-		return "member/memberJoin";
+	public void setMemberJoin() {
 		
+	}
+	@RequestMapping(value = "memberJoin",method = RequestMethod.POST)
+	public String setMemberJoin(MemberDTO memberDTO) throws Exception{
+		int result = memberService.setMemberJoin(memberDTO);
+		return "redirect:./memberList";
 	}
 	@RequestMapping(value = "memberLogin")
 	public void Login() {
