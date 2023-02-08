@@ -60,6 +60,7 @@ public class ProductController{
 	public ModelAndView productUpdate() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("product/productUpdate");
+	
 		return mv;
 	}
 }
