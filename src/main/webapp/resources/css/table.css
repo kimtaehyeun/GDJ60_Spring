@@ -1,0 +1,17 @@
+.table{
+    width: 70%;
+    margin: 100px auto 0px auto;
+}
+.title{
+    width: 50%;
+    margin: 100px auto 10px auto;
+}
+.image{
+    width:200px;
+    height: 400px;
+    margin: 100px auto 20px auto;
+}
+.body{
+    width: 200px;
+    margin: auto auto auto auto;
+}

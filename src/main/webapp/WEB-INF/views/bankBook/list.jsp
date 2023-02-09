@@ -6,18 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../../../resources/css/table.css">
 </head>
 <body>
-	<h1>BankBook ListPage</h1>
-
-	<table>
+	<h1 class="title">BankBook ListPage</h1>
+	<div class="image">
+		<img alt="aa" src="../resources/images/iu1.jpg">
+	</div>
+	<table class="table" border="1">
 		<thead>
 			<tr>
 				<th>상품명</th>
 				<th>이자율</th>
 				<th>판매여부</th>
 			</tr>
-			<table border="1">
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="dto">

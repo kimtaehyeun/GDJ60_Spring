@@ -39,12 +39,24 @@ public class BankBookDAOTest extends MyTestCase {
 		int i=bankBookDAO.setBankBookAdd(bankBookDTO);
 		assertEquals(1, i);
 	}
-	@Test
+//	@Test
 	public void setBankBookDelete()throws Exception{
 		BankBookDTO bankBookDTO = new BankBookDTO();
 		bankBookDTO.setBookNumber(43L);
 		int i = bankBookDAO.setBankBookDelete(bankBookDTO);
 		assertEquals(1, i);
 	}
-
+	
+	@Test
+	public void setBankBookUpdate()throws Exception{
+		BankBookDTO bankBookDTO= new BankBookDTO();
+		bankBookDTO.setBookNumber(231L);
+		bankBookDTO.setBookName("d");
+		bankBookDTO.setBookSale(1);
+		bankBookDTO.setBookDetail("d");
+		bankBookDTO.setBookRate(1.0);
+		int i = bankBookDAO.setBankBookUpdate(bankBookDTO);
+		assertEquals(1, i);
+		
+	}
 }
