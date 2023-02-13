@@ -9,34 +9,33 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/common_css.jsp"></c:import>
+<link rel="stylesheet" href="/resources/css/table.css">
 
-
-<c:import url="../template/header.jsp"></c:import>
 </head>
-<body class="body">
-	<link rel="stylesheet" href="/resources/css/table.css">
-	<div class="col-6">
-		<table class="tb2">
-			<thead>
-				<tr>
-					<th>상품명</th>
-					<th>평점</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${list}" var="dto">
-					<tr>
-						<!-- dto는 페이지 영역에 담김 -->
-						<td><a href="./detail?productNum=${dto.productNum}">${pageScope.dto.productName}</a>
-						</td>
-						<td>${pageScope.dto.productNum}</td>
-					<tr>
-				</c:forEach>
-			</tbody>
-		</table>
-		<a class=" btn btn-danger"href="./productAdd">상품등록</a>
-	</div>
 
-	
+<body>
+	<c:import url="../template/header.jsp"></c:import>
+	<h1 class="title">product ListPage</h1>
+
+	<table class="tb2">
+		<thead>
+			<tr>
+				<th>상품명</th>
+				<th>평점</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${list}" var="dto">
+				<tr>
+					<!-- dto는 페이지 영역에 담김 -->
+					<td><a href="./detail?productNum=${dto.productNum}">${pageScope.dto.productName}</a>
+					</td>
+					<td>${pageScope.dto.productNum}</td>
+				<tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	<a class=" btn btn-danger" href="./productAdd">상품등록</a>
+	<c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>

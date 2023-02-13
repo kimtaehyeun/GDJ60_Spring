@@ -5,25 +5,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>저축상품</title>
 <c:import url="../template/common_css.jsp"></c:import>
-<link rel="stylesheet" href="/resources/css/table.css">
 
 </head>
 <body>
-<c:import url="../template/header.jsp"></c:import>
-	
-	<h1 class="title">BankBook ListPage</h1>
-	<div class="image">
-		<img alt="aa" src="../resources/images/iu1.jpg">
-	</div>
-	<table class="tb2">
-		<thead>
-			<tr>
-				<th>상품명</th>
-				<th>이자율</th>
-				<th>판매여부</th>
-			</tr>
+	<c:import url="../template/header.jsp"></c:import>
+	<div class="container-fluid my-5">
+		<div class="row justify-content-center">
+			<h1
+				class="col-md-7 mx-auto text-center border-bottom border-dark pb-3">BankBook
+				ListPage</h1>
+		</div>
+		<div class="row col-md-7 mx-auto">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>상품명</th>
+						<th>이자율</th>
+						<th>판매여부</th>
+					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="dto">
@@ -31,14 +32,12 @@
 							<td><a href="./detail?bookNumber=${dto.bookNumber}">${pageScope.dto.bookName}</td>
 							<td>${dto.bookRate}</td>
 							<td>
-							<%-- <c:if test="${dto.bookSale eq 1}">판매중</c:if> <c:if
+								<%-- <c:if test="${dto.bookSale eq 1}">판매중</c:if> <c:if
 									test="${dto.bookSale eq 0}">판매중단</c:if>
-									 --%>
-					
-							<c:choose>
-								<c:when test="${dto.bookSale eq 1}">판매중</c:when>
-								<c:otherwise>판매중단</c:otherwise>
-							</c:choose>
+									 --%> <c:choose>
+									<c:when test="${dto.bookSale eq 1}">판매중</c:when>
+									<c:otherwise>판매중단</c:otherwise>
+								</c:choose>
 							</td>
 						</tr>
 					</c:forEach>
@@ -46,7 +45,11 @@
 
 
 			</table>
-			<a href="./add">상품등록
-			</a>
+		</div>
+		<div class="row col-md-7 mx-auto">
+			<a href="./add" class="btn btn-primary col col-md-2 offset-md-10 ">상품등록 </a>
+		</div>
+	</div>
+	<c:import url="../template/common_js.jsp"></c:import>
 </body>
 </html>
