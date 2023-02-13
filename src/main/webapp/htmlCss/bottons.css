@@ -1,0 +1,35 @@
+.wrap{
+    width: 400px;
+    border-color: black;
+    border-radius: 3px;
+    border-style: solid;
+    float: left;
+}
+
+#b1{
+    color: red;
+    background-color: blue;
+    float: left;
+}
+
+#b2{
+    margin-left: 50px;
+    margin-top: 0px;
+    float: left;
+    border-radius: 10px;
+    border: gold 1px;
+    border-style: double;
+
+}
+
+#b3{
+    margin-left: 50px;
+    float: left;
+    border-style: dotted;
+}
+
+#b4{
+    color: blue;
+    background-color: red;
+    float: right;
+}

@@ -13,7 +13,7 @@
 	<div class="image">
 		<img alt="aa" src="../resources/images/iu1.jpg">
 	</div>
-	<table class="table" border="1">
+	<table class="tb2">
 		<thead>
 			<tr>
 				<th>상품명</th>
