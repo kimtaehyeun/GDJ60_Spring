@@ -17,10 +17,16 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@RequestMapping(value = "memberJoin",method = RequestMethod.GET)
-	public String memberJoin() {
+	public String memberJoin(ModelAndView mv) {
 		return "member/memberJoin";
 		
 	}
+	@RequestMapping(value = "memberJoin",method = RequestMethod.POST)
+	public String memberJoin(ModelAndView mv, MemberDTO memberDTO) {
+		return "member/memberJoin";
+		
+	}
+	
 	@RequestMapping(value = "memberLogin")
 	public void Login() {
 		

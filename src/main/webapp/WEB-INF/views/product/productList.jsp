@@ -8,26 +8,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../../../resources/css/table.css">
+<c:import url="../template/common_css.jsp"></c:import>
 
+
+<c:import url="../template/header.jsp"></c:import>
 </head>
 <body class="body">
-	<h1>Product List</h1>
-	<%
-	List<ProductDTO> ar = (List<ProductDTO>) request.getAttribute("list");
-	for (ProductDTO productDTO : ar) {
-	%>
-	<h3><%=productDTO.getProductName()%></h3>
-
-
-	<%
-	}
-	%>
-	<hr>
-	
-	
+	<link rel="stylesheet" href="/resources/css/table.css">
 	<div class="col-6">
-		<table>
+		<table class="tb2">
 			<thead>
 				<tr>
 					<th>상품명</th>
@@ -46,13 +35,8 @@
 			</tbody>
 		</table>
 		<a class=" btn btn-danger"href="./productAdd">상품등록</a>
-		
-		
 	</div>
 
-	<%-- ${requestScope.list}
-	<a href="./detail?Num=1">productDetail</a>
-	<a href="./detail?Num=1">productDetail</a> --%>
 	
 </body>
 </html>

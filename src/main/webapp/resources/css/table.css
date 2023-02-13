@@ -5,7 +5,7 @@
     border-spacing: 0px;
     border-collapse: collapse;
     /* border-collapse: separate; */
-/* 기본은seperate */
+
 }
 .tb1 th, .tb1 td{
     border: 1px solid black;
