@@ -12,7 +12,7 @@
 <body>
 	<c:import url="../template/header.jsp"></c:import>
 	<div class="container-fluid my-5">
-		<div class="row justify-content-center">
+		<div class="row mb-4">
 			<h1
 				class="col-md-7 mx-auto text-center border-bottom border-dark pb-3">BankBook
 				ListPage</h1>

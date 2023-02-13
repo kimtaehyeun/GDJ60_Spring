@@ -15,7 +15,7 @@ public class MemberController {
 	
 @Autowired
 	private MemberService memberService;
-	
+	//
 	@RequestMapping(value = "memberJoin",method = RequestMethod.GET)
 	public ModelAndView setMemberJoin(ModelAndView mv) throws Exception {
 		mv.setViewName("member/memberJoin");

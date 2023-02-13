@@ -46,9 +46,7 @@
 					</div>
 					<div class="col-12">
 						<button type="submit" class="btn btn-primary">회원가입</button>
-					</div>
-
-
+					</div> 
 				</div>
 			</form>
 		</div>
