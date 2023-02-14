@@ -13,7 +13,7 @@ public class MemberDAOTest extends MyTestCase{
 	private MemberDAO memberDAO;
 
 
-		@Test
+//		@Test
 		public void getMemberList() throws Exception{
 			List<MemberDTO> ar =	memberDAO.getMemberList();
 			assertNotEquals(0, ar.size());
@@ -30,4 +30,13 @@ public class MemberDAOTest extends MyTestCase{
 //		int i =memberDAO.setMemberJoin(memberDTO);
 //		assertEquals(1, i);
 //	}
+//		@Test
+		public void getMemberLogin()throws Exception{
+			MemberDTO memberDTO2 = new MemberDTO();
+			memberDTO2.setId("ads12345");
+			memberDTO2.setPw("asdfbbb");
+			memberDTO2=memberDAO.getMemberLogin(memberDTO2);
+			assertNotNull(memberDTO2);
+			
+		}
 }

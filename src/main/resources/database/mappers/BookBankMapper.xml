@@ -22,4 +22,5 @@ UPDATE BANKBOOK SET BOOKNAME=#{bookName}, BOOKRATE=#{bookRate}, BOOKSALE=#{bookS
 <delete id="setBankBookDelete" parameterType="BankBookDTO">
 DELETE FROM BANKBOOK  WHERE BOOKNUMBER=#{bookNumber}
 </delete>
+
 </mapper>

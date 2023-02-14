@@ -2,8 +2,8 @@ header{
     width: 100%;
     height: 67px;
     background-image: url("../images/header_bg.png");
-    background-repeat: repeat-x; /*가로만 반복*/
-    /* 상대경로를 정할때 css기준 상대경로로 지정한다. */
+    background-repeat: repeat-x; /*媛�濡쒕쭔 諛섎났*/
+    /* �긽��寃쎈줈瑜� �젙�븷�븣 css湲곗� �긽��寃쎈줈濡� 吏��젙�븳�떎. */
 }
 .header_wrap{
     width: 70%;

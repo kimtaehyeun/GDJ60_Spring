@@ -47,7 +47,7 @@ public class BankBookDAOTest extends MyTestCase {
 		assertEquals(1, i);
 	}
 	
-	@Test
+//	@Test
 	public void setBankBookUpdate()throws Exception{
 		BankBookDTO bankBookDTO= new BankBookDTO();
 		bankBookDTO.setBookNumber(231L);

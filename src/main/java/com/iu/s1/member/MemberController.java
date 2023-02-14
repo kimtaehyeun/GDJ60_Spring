@@ -24,15 +24,22 @@ public class MemberController {
 	}
 	@RequestMapping(value = "memberJoin",method = RequestMethod.POST)
 	public ModelAndView memberJoin(ModelAndView mv, MemberDTO memberDTO) throws Exception {
-		int result = memberService.setMemberJoin(memberDTO);
-		mv.setViewName("redirect:./memberList");
+		int result = memberService.setMemberAdd(memberDTO);
+		mv.setViewName("redirect:../");
 		return mv;
 		
 	}
 	
-	@RequestMapping(value = "memberLogin")
-	public void Login() {
-		
+	@RequestMapping(value = "memberLogin",method= RequestMethod.GET)
+	public ModelAndView getMemberLogin(ModelAndView mv) {
+		mv.setViewName("member/memberLogin");
+		return mv;
+	}
+	@RequestMapping(value = "memberLogin",method= RequestMethod.POST)
+	public ModelAndView getMemberLogin(ModelAndView mv, MemberDTO memberDTO) throws Exception{
+		memberDTO = memberService.getMemberLogin(memberDTO);
+		mv.setViewName("redirect:../");
+		return mv;
 	}
 	@RequestMapping(value="memberList")
 	public ModelAndView getMemberList(ModelAndView mv) throws Exception{
@@ -48,4 +55,5 @@ public class MemberController {
 		mv.setViewName("member/memberPage");
 		return mv;
 	}
+	
 }
