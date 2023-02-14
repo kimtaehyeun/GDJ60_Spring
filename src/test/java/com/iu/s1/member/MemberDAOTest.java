@@ -39,4 +39,15 @@ public class MemberDAOTest extends MyTestCase{
 			assertNotNull(memberDTO2);
 			
 		}
+//		@Test
+		public void setMemberUpdate() throws Exception{
+			MemberDTO memberDTO = new MemberDTO();
+			memberDTO.setName("rasdddd");
+			memberDTO.setPhone("ffffff");
+			memberDTO.setAddress("dfasdfasdfbb");
+			memberDTO.setEmail("asfsadfsadf");
+			memberDTO.setId("dd");
+			int i =memberDAO.setmemberUpdate(memberDTO);
+			assertEquals(1, i);
+		}
 }

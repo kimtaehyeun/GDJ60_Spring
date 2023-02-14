@@ -18,4 +18,8 @@
 	<select id="getMemberLogin" parameterType="MemberDTO" resultType="MemberDTO">
 		SELECT * FROM "MEMBER" WHERE ID=#{id} AND PW=#{pw}
 	</select>
+	
+	<update id="setMemberUpdate" parameterType="MemberDTO">
+	UPDATE "MEMBER" SET NAME=#{name},ADDRESS=#{address},PHONE=#{phone},EMAIL=#{email} WHERE ID=#{id}
+	</update>
 </mapper>
