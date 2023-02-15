@@ -16,10 +16,10 @@
 			<h1>Member Page</h1>
 		</div>
 		<div class="row">
-			<h3>${sessionScope.member.name}</h3>
-			<h3>${sessionScope.member.address}</h3>
-			<h3>${sessionScope.member.phone}</h3>
-			<h3>${sessionScope.member.email}</h3>
+			<h3>${dto.name}</h3>
+			<h3>${dto.address}</h3>
+			<h3>${dto.phone}</h3>
+			<h3>${dto.email}</h3>
 			<a href="/member/memberUpdate">수정</a>
 		</div>
 	</div>

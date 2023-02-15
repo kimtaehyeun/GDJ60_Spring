@@ -46,8 +46,38 @@
 
 			</table>
 		</div>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+			<li class="page-item"><a class="page-link" href="./list?page=${pager.startNum-1 }"
+					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+				</a></li>
+				<li class="page-item  ${pager.before ? 'disabled' : ''}"><a class="page-link" href="./list?page=${pager.startNum-1 }"
+					aria-label="Previous"> <span aria-hidden="true">&lsaquo;</span>
+				</a></li>
+				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" step="1"
+					var="i">
+					<li class="page-item"><a class="page-link"
+						href="./list?page=${i}">${i}</a></li>
+				</c:forEach>
+				<li class="page-item ${pager.after eq false ? 'disabled' : ''}"><a class="page-link" href="./list?page=${pager.lastNum+1}"
+					 aria-label="Next"> <span aria-hidden="true">&rsaquo;</span>
+				</a></li>
+				<li class="page-item"><a class="page-link" href="./list?page=${pager.lastNum+1}"
+					 aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				</a></li>
+			</ul>
+		</nav>
+			<%-- <!-- for(int i=1; i<??; i++){i} -->
+			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" step="1"
+				var="i">
+				<a href="./list?page=${i}">${i}</a>
+			</c:forEach> --%>
 		<div class="row col-md-7 mx-auto">
-			<a href="./add" class="btn btn-primary col col-md-2 offset-md-10 ">상품등록 </a>
+			<a href="./add" class="btn btn-primary col col-md-2 offset-md-10 ">상품등록
+			</a>
+
+
+
 		</div>
 	</div>
 	<c:import url="../template/common_js.jsp"></c:import>

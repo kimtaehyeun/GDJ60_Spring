@@ -36,4 +36,5 @@ public class MemberDAO {
 	public int setmemberUpdate(MemberDTO memberDTO)throws Exception{
 		return sqlSession.update(NAMESAPCE+"setMemberUpdate",memberDTO);
 	}
+	
 }

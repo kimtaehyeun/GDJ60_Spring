@@ -15,10 +15,10 @@
 		<div class="row">
 		
 			<form action="./memberUpdate" method="post">
-				이름 : <input type="text" class="form-control" name="name" value="${sessionScope.member.name}" ><br>
-				주소 : <input type="text" class="form-control" name="address" value="${sessionScope.member.address}"  ><br>
-				폰넘버 : <input type="text" class="form-control" name="phone" value="${sessionScope.member.phone}" ><br>
-				이메일 : <input type="text" class="form-control" name="email" value="${sessionScope.member.email}" ><br>
+				이름 : <input type="text" class="form-control" name="name" value="${dto.name}" ><br>
+				주소 : <input type="text" class="form-control" name="address" value="${dto.address}"  ><br>
+				폰넘버 : <input type="text" class="form-control" name="phone" value="${dto.phone}" ><br>
+				이메일 : <input type="text" class="form-control" name="email" value="${dto.email}" ><br>
 				<!--  안보내도됨--><%-- <input type="hidden" name="id" value="${sessionScope.member.id}" ><br> --%>
 				<button type="submit">전송</button>
 			</form>
