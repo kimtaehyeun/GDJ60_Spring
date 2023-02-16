@@ -31,7 +31,7 @@ SELECT COUNT(PRODUCTNUM) FROM PRODUCT
 	</select>
 	
 	<insert id="setProductAdd" parameterType="ProductDTO">
-	INSERT INTO PRODUCT VALUES(PRODUCT_SEQ.CURVAR,#{productName},#{productDetail},#{productJumsu})
+	INSERT INTO PRODUCT VALUES(#{productNum},#{productName},#{productDetail},#{productJumsu})
 	
 	</insert>
 <delete id="setDeleteProduct" parameterType="Long">

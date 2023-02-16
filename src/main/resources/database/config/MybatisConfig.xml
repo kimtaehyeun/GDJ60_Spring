@@ -12,6 +12,10 @@
 			alias="MemberDTO" />
 			<typeAlias type="com.iu.s1.member.RoleDTO"
 			alias="RoleDTO" />
+			
+			<typeAlias type="com.iu.s1.bankbook.BankBookImgDTO" alias="BankBookImgDTO" />
+			
+			
 		<typeAlias type="java.lang.Long" alias="Long" />
 		<typeAlias type="com.iu.s1.util.Pager" alias="Pager"/>
 		

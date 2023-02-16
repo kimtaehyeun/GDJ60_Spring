@@ -16,7 +16,7 @@
 				Addpage</h1>
 		</div>
 		<div class="row col-md-7 mx-auto">
-			<form action="./add" method="POST">
+			<form action="./add" method="POST" enctype="multipart/form-data">
 				<div class="mb-3">
 					<label for="bookName" class="form-label">상품명</label> <input
 						type="text" class="form-control" name="bookName">
@@ -31,7 +31,7 @@
 					<textarea class="form-control" name="bookDetail" rows="3"></textarea>
 				</div>
 				<div class="mb-3">
-					<label for="files" class="form-label">이미지</label>
+					<label for="files" class="form-label" >이미지</label>
 					<input type="file" class="form-control" id="files" name="pic">
 				</div>
 				
