@@ -3,17 +3,50 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iu.s1.bankbook.BankBookDAO">
-<!--  parameterType & resultType 클래스이름은 config에 별칭 설정-->
-	
-	<select id="getBankBookCount" resultType="Long">
+
+	<!-- parameterType & resultType 클래스이름은 config에 별칭 설정 -->
+
+	<sql id="searchCondition">
+
+		<if test="kind =='contents'">
+			WHERE BOOKDETAIL LIKE '%' || #{search} || '%'
+		</if>
+		<if test="kind =='title'">
+			WHERE BOOKNAME LIKE '%' || #{search} || '%'
+		</if>
+
+	</sql>
+	<sql id="searchCondition2">
+		WHERE
+		<choose>
+			<when test="kind == 'contents'"> BOOKETAIL </when>
+			<otherwise> BOOKNAME </otherwise>
+		</choose>
+		LIKE '%' || #{search} || '%'
+
+	</sql>
+
+	<select id="getBankBookCount" parameterType="Pager"
+		resultType="Long">
 		SELECT COUNT(BOOKNUMBER) FROM BANKBOOK
+
+		<include refid="searchCondition"></include>
+
 	</select>
+
+	<select id="getBankBookList" parameterType="Pager"
+		resultType="BankBookDTO">
+		SELECT * FROM
+		(SELECT ROWNUM R, B.* FROM (
+		SELECT * FROM
+		BANKBOOK
+	<include refid="searchCondition2">
 	
-	<select id="getBankBookList" parameterType="Pager" resultType="BankBookDTO">
-SELECT * FROM
-	(SELECT ROWNUM R, B.* FROM (SELECT * FROM BANKBOOK ORDER BY BOOKNUMBER DESC)B
-	)
-WHERE R  BETWEEN #{startRow} AND #{lastRow}
+	</include>
+		ORDER BY BOOKNUMBER DESC
+		)B
+		)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
 
 	</select>
 
@@ -22,18 +55,22 @@ WHERE R  BETWEEN #{startRow} AND #{lastRow}
 		SELECT * FROM BANKBOOK WHERE BOOKNUMBER =#{bookNumber}
 	</select>
 	<insert id="setBankBookAdd" parameterType="BankBookDTO">
-		INSERT INTO BANKBOOK VALUES
+		INSERT INTO BANKBOOK
+		VALUES
 		(BANKBOOK_SEQ.NEXTVAL,#{bookName},#{bookRate},#{bookSale},#{bookDetail})
 	</insert>
 
 	<update id="setBankBookUpdate" parameterType="BankBookDTO">
-		UPDATE BANKBOOK SET BOOKNAME=#{bookName}, BOOKRATE=#{bookRate},
-		BOOKSALE=#{bookSale}, BOOKDETAIL =#{bookDetail} WHERE BOOKNUMBER
+		UPDATE BANKBOOK SET
+		BOOKNAME=#{bookName}, BOOKRATE=#{bookRate},
+		BOOKSALE=#{bookSale},
+		BOOKDETAIL =#{bookDetail} WHERE BOOKNUMBER
 		=#{bookNumber}
 	</update>
 
 	<delete id="setBankBookDelete" parameterType="BankBookDTO">
-		DELETE FROM BANKBOOK WHERE BOOKNUMBER=#{bookNumber}
+		DELETE FROM
+		BANKBOOK WHERE BOOKNUMBER=#{bookNumber}
 	</delete>
 
 </mapper>

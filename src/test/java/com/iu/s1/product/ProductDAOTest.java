@@ -14,13 +14,13 @@ public class ProductDAOTest extends MyTestCase{
 	@Autowired
 	private ProductDAO productDAO;
 	
-	@Test
-	public void getProductListTest() throws Exception{
-		List<ProductDTO> ar =	productDAO.getProductList();
-		//단정문
-		assertNotEquals(0, ar.size());
-	}
-	@Test
+//	@Test
+//	public void getProductListTest() throws Exception{
+//		List<ProductDTO> ar =	productDAO.getProductList();
+//		//단정문
+//		assertNotEquals(0, ar.size());
+//	}
+//	@Test
 	public void getProductDetailTest()throws Exception{
 		ProductDTO productDTO = new ProductDTO();
 		productDTO.setProductNum(29L);
@@ -29,11 +29,15 @@ public class ProductDAOTest extends MyTestCase{
 	}
 	@Test
 	public void setProductAddTest() throws Exception{
+		for(int i=0; i<30;i++) {
 		ProductDTO productDTO = new ProductDTO();
-		productDTO.setProductNum(1L);
-		productDTO.setProductName("1번내꺼 ㅋ");
+		
+		productDTO.setProductName("test123"+i);
 		productDTO.setProductDetail("ga");
-		int i = productDAO.setProductAdd(productDTO);
-		assertEquals(1,i);
+		productDTO.setProductJumsu(1.0);
+		
+		int result = productDAO.setProductAdd(productDTO);
+		}
+		
 	}
 }

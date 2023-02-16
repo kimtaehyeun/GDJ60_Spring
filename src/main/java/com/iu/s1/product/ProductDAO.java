@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.iu.s1.util.DBConnection;
+import com.iu.s1.util.Pager;
 
 @Repository
 public class ProductDAO {
@@ -31,13 +32,17 @@ public class ProductDAO {
 	public Long getProductNum() throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getProductNum");
 	}
-
-
-	public List<ProductDTO> getProductList()throws Exception{
-		
-		return sqlSession.selectList(NAMESPACE+"getProductList");
+	
+	public Long getProductTotalCount() {
+		return sqlSession.selectOne(NAMESPACE+"getProductTotalCount");
 	}
 
+	//GETLIST
+	public List<ProductDTO> getProductList(Pager pager)throws Exception{
+		
+		
+		return sqlSession.selectList(NAMESPACE+"getProductList",pager);
+	}
 
 
 	public int setProductAdd(ProductDTO productDTO) throws Exception{
