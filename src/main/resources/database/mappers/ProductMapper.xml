@@ -6,15 +6,20 @@
 <mapper namespace="com.iu.s1.product.ProductDAO"><!-- 이 맵퍼를 사용할 클래스 패키지명까지 작성 -->
 	<select id="getProductNum" resultType="Long">
 		SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
-		
 		</select>
+
+<select id="getProductTotalCount" resultType="Long">
+SELECT COUNT(PRODUCTNUM) FROM PRODUCT
+</select>
 	
 	
-	
-	<select id="getProductList" resultType="ProductDTO" statementType="PREPARED">
-		SELECT PRODUCTNUM, PRODUCTNAME, PRODUCTJUMSU
-		FROM PRODUCT
-		ORDER BY PRODUCTNUM DESC
+	<select id="getProductList" parameterType="Pager" resultType="ProductDTO" statementType="PREPARED">
+		
+		SELECT * FROM (
+		SELECT ROWNUM R, B.* FROM
+		(SELECT * FROM PRODUCT p ORDER BY PRODUCTNUM DESC) B)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+		
 		<!-- 세미콜론X -->
 		<!-- namespace  : 맵퍼를 사용할 클래스 패키지명까지 작성-->
 		<!-- id : 맵퍼를 사용할 클래스에서 query문을 사용할 메서드 명 -->
@@ -26,7 +31,7 @@
 	</select>
 	
 	<insert id="setProductAdd" parameterType="ProductDTO">
-	INSERT INTO PRODUCT VALUES(#{productNum},#{productName},#{productDetail},0.0)
+	INSERT INTO PRODUCT VALUES(PRODUCT_SEQ.CURVAR,#{productName},#{productDetail},#{productJumsu})
 	
 	</insert>
 <delete id="setDeleteProduct" parameterType="Long">

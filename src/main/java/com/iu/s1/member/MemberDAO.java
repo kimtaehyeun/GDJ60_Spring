@@ -19,12 +19,22 @@ public class MemberDAO {
 	private SqlSession sqlSession;
 	private final String NAMESAPCE="com.iu.s1.member.MemberDAO.";
 	
-	public int setMemberJoin(MemberDTO memberDTO) throws Exception{
-		return sqlSession.insert(NAMESAPCE+"setMemberJoin", memberDTO );
+	public int setMemberAdd(MemberDTO memberDTO) throws Exception{
+		return sqlSession.insert(NAMESAPCE+"setMemberAdd", memberDTO );
 	}
 	
 	
 	public List<MemberDTO> getMemberList() throws Exception{
 		return sqlSession.selectList(NAMESAPCE+"getMemberList");
 	}
+	public int setMemberRoleAdd(MemberDTO memberDTO) throws Exception{
+		return sqlSession.insert(NAMESAPCE+"setMemberRoleAdd",memberDTO);
+	}
+	public MemberDTO getMemberLogin(MemberDTO memberDTO) throws Exception{
+		return sqlSession.selectOne(NAMESAPCE+"getMemberLogin", memberDTO);
+	}
+	public int setmemberUpdate(MemberDTO memberDTO)throws Exception{
+		return sqlSession.update(NAMESAPCE+"setMemberUpdate",memberDTO);
+	}
+	
 }

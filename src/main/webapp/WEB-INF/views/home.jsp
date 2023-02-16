@@ -10,7 +10,7 @@
 </head>
 <body>
 	<c:import url="./template/header.jsp"></c:import>
-	
+
 
 	<div class="container-fluid my-5">
 		<div class="row col-md-6 offset-md-3">
@@ -50,6 +50,9 @@
 				</button>
 			</div>
 		</div>
+	</div>
+	<div>
+		<h1>${sessionScope.member.name}</h1>
 	</div>
 	<c:import url="./template/common_js.jsp"></c:import>
 </body>
