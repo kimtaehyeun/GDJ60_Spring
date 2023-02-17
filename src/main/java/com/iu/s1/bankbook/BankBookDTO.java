@@ -8,7 +8,15 @@ public class BankBookDTO {
 	private Integer bookSale;
 	private String bookDetail;
 	
+	private BankBookImgDTO bankBookImgDTO;
 	
+	
+	public BankBookImgDTO getBankBookImgDTO() {
+		return bankBookImgDTO;
+	}
+	public void setBankBookImgDTO(BankBookImgDTO bankBookImgDTO) {
+		this.bankBookImgDTO = bankBookImgDTO;
+	}
 	public Long getBookNumber() {
 		return bookNumber;
 	}

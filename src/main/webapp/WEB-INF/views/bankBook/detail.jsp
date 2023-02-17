@@ -15,6 +15,11 @@
 		<h3>detail : ${dto.bookDetail}</h3>
 		<h3>Rate: ${dto.bookRate}</h3>
 		<h3>Sale: ${dto.bookSale}</h3>
+		<div>
+		<c:if test="${not empty dto.bankBookImgDTO}">
+			<img alt="" src="../resources/upload/bankBook/${dto.bankBookImgDTO.fileName}">
+		</c:if>
+		</div>
 		<a href="./delete?bookNumber=${dto.bookNumber}">상품삭제</a>
 	</c:if>
 	<c:if test="${empty dto}">
