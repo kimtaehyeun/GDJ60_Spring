@@ -19,6 +19,12 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	//
+	@RequestMapping(value = "memberAgree", method = RequestMethod.GET)
+	public void setMemberAgree(ModelAndView mv) throws Exception{
+		mv.setViewName("member/memberAgree");
+		
+	}
+	
 	@RequestMapping(value = "memberJoin",method = RequestMethod.GET)
 	public ModelAndView setMemberJoin(ModelAndView mv) throws Exception {
 		mv.setViewName("member/memberJoin");
@@ -97,5 +103,5 @@ public class MemberController {
 		mv.setViewName("redirect:./memberPage");
 		return mv;
 	}
-
+	
 }
