@@ -30,11 +30,13 @@
 					<label for="bookDetail" class="form-label">상세설명</label>
 					<textarea class="form-control" name="bookDetail" rows="3"></textarea>
 				</div>
-				<div class="mb-3">
-					<label for="files" class="form-label" >이미지</label>
-					<input type="file" class="form-control" id="files" name="pic">
+				<div id="fileList">
+					<!-- <div class="mb-3">
+						<label for="files" class="form-label" >이미지</label>
+						<input type="file" class="form-control" id="files" name="pic">
+					</div> -->
+					<button type="button" id="btn">add</button>
 				</div>
-				
 				<div class="form-check">
 					<input class="form-check-input" type="radio" name="bookSale"
 						value="1" checked> <label class="form-check-label">
@@ -52,5 +54,10 @@
 	</div>
 
 	<c:import url="../template/common_js.jsp"></c:import>
+	<script src="/resources/js/fileManager.js"></script>
+	<script>
+		setMax(3);
+		setParam('f');
+	</script>
 </body>
 </html>
