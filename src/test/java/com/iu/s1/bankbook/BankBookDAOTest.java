@@ -16,12 +16,12 @@ public class BankBookDAOTest extends MyTestCase {
 	@Autowired
 	private BankBookDAO bankBookDAO ;
 
-	//	@Test
+//		@Test
 	public void getBankBookList(Pager pager) throws Exception{
 		List<BankBookDTO> ar = bankBookDAO.getBankBookList(pager);
 		assertNotEquals(0, ar.size());
 	}
-	//	@Test
+		@Test
 	public void getBankBookDetail()throws Exception{
 
 		BankBookDTO bankBookDTO = new BankBookDTO();
@@ -30,7 +30,7 @@ public class BankBookDAOTest extends MyTestCase {
 		bankBookDTO=bankBookDAO.getBankBookDetail(bankBookDTO);
 		assertNull(bankBookDTO);
 	}
-	@Test
+//	@Test
 	public void setBankBookAdd()throws Exception{
 		int result=0;
 		for(int i =0; i<30; i++) {
@@ -39,7 +39,7 @@ public class BankBookDAOTest extends MyTestCase {
 			int num = (int)(d*1000);
 			d=num/100.0;
 		BankBookDTO bankBookDTO = new BankBookDTO();
-		bankBookDTO.setBookName("ÅÂÇöÀû±Ý"+i);
+		bankBookDTO.setBookName("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"+i);
 		bankBookDTO.setBookRate(d);
 		bankBookDTO.setBookSale(1);
 		bankBookDTO.setBookDetail("q");
