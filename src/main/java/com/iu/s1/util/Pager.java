@@ -2,85 +2,88 @@ package com.iu.s1.util;
 
 public class Pager {
 	
-	//°Ë»ö Á¾·ù(»ç¿ëÇÒ column)
-	private String kind;
-	//°Ë»ö¾î
-	private String search;
+	private Long bookNumber;
 	
 	
-	////////////////////////////////////////////////////////////
-	
-	
-	//ÇÑÆäÀÌÁö¿¡ Ãâ·ÂÇÒ rowÀÇ °¹¼ö
-	private Long perPage;
-
-	//ÇÑºí·°´ç Ãâ·ÂÇÒ ¹øÈ£ÀÇ °¹¼ö
-	private Long perBlock;
-
-	//ÀüÃ¼ ÆäÀÌÁö °¹¼ö
-	private Long totalPage;
-	//Å¬¶óÀÌ¾ğÆ®°¡ º¸°í½ÍÀº ÆäÀÌÁö ¹øÈ£(parameter)
-	private Long page;
-
-	//table¿¡¼­ Á¶È¸ÇÒ ½ÃÀÛ ¹øÈ£
-	private Long startRow;
-
-	//	table¿¡¼­ Á¶È¸ÇÒ ³¡¹øÈ£
-	private Long lastRow;
-
-	//ÀüÃ¼ rowÀÇ °¹¼ö¸¦ ´ãÀ» º¯¼ö
-//	private Long totalCount;
-
-	//jsp¿¡ Ãâ·ÂÇÏ·Á°í ÇÏ´Â º¯¼ö page¼ıÀÚ
-	
-	private Long startNum;
-//	jsp¿¡ Ãâ·ÂÇÏ·Á°í ÇÏ´Â º¯¼ö page¼ıÀÚ
-	private Long lastNum;
-
-	private boolean before;
-	private boolean after;
-	private Long MaxPage;
-	//startRow, lastRow¸¦ °è»êÇÏ´Â ¸Ş¼­µå
-	public void makeRow() {
-		this.startRow = (this.getPage()-1)*getPerPage()+1;
-		this.lastRow = this.getPage()*this.getPerPage();
-	}
-	//startnum , lastnum
-	public void makeNum(Long totalCount) {
-
-		//1. ÀüÃ¼ rowÀÇ °¹¼ö ±¸ÇÏ±â
-		//2. ÃÑ pageÀÇ °¹¼ö
-		this.totalPage = totalCount/this.getPerPage();
+	//ê²€ìƒ‰ ì¢…ë¥˜(ì‚¬ìš©í•  column)
+		private String kind;
+		//ê²€ìƒ‰ì–´
+		private String search;
 		
-		if(totalCount%this.getPerPage()!=0) {
-			totalPage=totalPage+1;
-		}
-		if(this.getPage()>totalPage) {
-			this.setPage(totalPage);
-		}
+		
+		////////////////////////////////////////////////////////////
+		
+		
+		//í•œí˜ì´ì§€ì— ì¶œë ¥í•  rowì˜ ê°¯ìˆ˜
+		private Long perPage;
 
-		//3. ÇÑ block¿¡ Ãâ·ÂÇÒ °¹¼ö
-		//		Long perBlock=5L;
+		//í•œë¸”ëŸ­ë‹¹ ì¶œë ¥í•  ë²ˆí˜¸ì˜ ê°¯ìˆ˜
+		private Long perBlock;
 
-		//4. ÃÑ blockÀÇ ¼ö
-		Long totalBlock= totalPage/this.getPerBlock();
-		if(totalPage%this.getPerBlock()!=0) {
-			totalBlock++;
+		//ì „ì²´ í˜ì´ì§€ ê°¯ìˆ˜
+		private Long totalPage;
+		//í´ë¼ì´ì–¸íŠ¸ê°€ ë³´ê³ ì‹¶ì€ í˜ì´ì§€ ë²ˆí˜¸(parameter)
+		private Long page;
+
+		//tableì—ì„œ ì¡°íšŒí•  ì‹œì‘ ë²ˆí˜¸
+		private Long startRow;
+
+		//	tableì—ì„œ ì¡°íšŒí•  ëë²ˆí˜¸
+		private Long lastRow;
+
+		//ì „ì²´ rowì˜ ê°¯ìˆ˜ë¥¼ ë‹´ì„ ë³€ìˆ˜
+//		private Long totalCount;
+
+		//jspì— ì¶œë ¥í•˜ë ¤ê³  í•˜ëŠ” ë³€ìˆ˜ pageìˆ«ì
+		
+		private Long startNum;
+//		jspì— ì¶œë ¥í•˜ë ¤ê³  í•˜ëŠ” ë³€ìˆ˜ pageìˆ«ì
+		private Long lastNum;
+
+		private boolean before;
+		private boolean after;
+		private Long MaxPage;
+		//startRow, lastRowë¥¼ ê³„ì‚°í•˜ëŠ” ë©”ì„œë“œ
+		public void makeRow() {
+			this.startRow = (this.getPage()-1)*getPerPage()+1;
+			this.lastRow = this.getPage()*this.getPerPage();
 		}
-		//5. page ¹øÈ£·Î ÇöÀç block ¹øÈ£ ±¸ÇÏ±â
-		//page 1-5 curBlock 1
-		//page 6-10curBlock 2
-		//page 11-15 curBlock 3
-		Long curBlock=this.getPage()/this.getPerBlock();
-		if(this.page%this.getPerBlock()!=0) {
-			curBlock++;
-		}
-		//6. curBlockÀÇ ½ÃÀÛ¹øÈ£¿Í ³¡¹øÈ£¸¦ °è»ê
-		//		curBlock 	StartNum	LastNum
-		//		1						1					5
-		//		2						6					10	
-		//		3						11					15
-		//		
+		//startnum , lastnum
+		public void makeNum(Long totalCount) {
+
+			//1. ì „ì²´ rowì˜ ê°¯ìˆ˜ êµ¬í•˜ê¸°
+			//2. ì´ pageì˜ ê°¯ìˆ˜
+			this.totalPage = totalCount/this.getPerPage();
+			
+			if(totalCount%this.getPerPage()!=0) {
+				totalPage=totalPage+1;
+			}
+			if(this.getPage()>totalPage) {
+				this.setPage(totalPage);
+			}
+
+			//3. í•œ blockì— ì¶œë ¥í•  ê°¯ìˆ˜
+			//		Long perBlock=5L;
+
+			//4. ì´ blockì˜ ìˆ˜
+			Long totalBlock= totalPage/this.getPerBlock();
+			if(totalPage%this.getPerBlock()!=0) {
+				totalBlock++;
+			}
+			//5. page ë²ˆí˜¸ë¡œ í˜„ì¬ block ë²ˆí˜¸ êµ¬í•˜ê¸°
+			//page 1-5 curBlock 1
+			//page 6-10curBlock 2
+			//page 11-15 curBlock 3
+			Long curBlock=this.getPage()/this.getPerBlock();
+			if(this.page%this.getPerBlock()!=0) {
+				curBlock++;
+			}
+			//6. curBlockì˜ ì‹œì‘ë²ˆí˜¸ì™€ ëë²ˆí˜¸ë¥¼ ê³„ì‚°
+			//		curBlock 	StartNum	LastNum
+			//		1						1					5
+			//		2						6					10	
+			//		3						11					15
+			//		
 		this.startNum=(curBlock-1)*this.getPerBlock()+1;
 		this.lastNum=curBlock*this.getPerBlock();
 		this.before=false;
@@ -93,7 +96,13 @@ public class Pager {
 			this.before=true;
 		}
 
+	}
 
+	public Long getBookNumber() {
+		return bookNumber;
+	}
+	public void setBookNumber(Long bookNumber) {
+		this.bookNumber = bookNumber;
 	}
 	public Long getPerPage() {
 		if(this.perPage==null||this.perPage==0) {
