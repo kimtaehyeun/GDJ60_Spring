@@ -18,9 +18,10 @@ public class BankBookService {
 	@Autowired
 	private FileManager fileManager;
 	
-	//testCase Å×½ºÆ®½Ã nullÀÌ µé¾î¿È
-	//testÇÏ·Á¸é apiÃß°¡ÇØ¾ßÇÔ. = > testÇÒ¶© ÅèÄ¹À» ½ÇÇà ¾È½ÃÅ°±â ‹š¹®
-	@Autowired
+	//testCase í…ŒìŠ¤íŠ¸ì‹œ nullì´ ë“¤ì–´ì˜´
+	//testí•˜ë ¤ë©´ apiì¶”ê°€í•´ì•¼í•¨. = > testí• ë• í†°ìº£ì„ ì‹¤í–‰ ì•ˆì‹œí‚¤ê¸° Â‹Âšë•Œë¬¸
+	
+//	@Autowired
 	private ServletContext servletContext;
 	
 	public List<BankBookDTO> getBankBookList(Pager pager)throws Exception{
@@ -40,13 +41,13 @@ public class BankBookService {
 		
 		
 		if(!pic.isEmpty()) {
-		//1. fileÀ» hdd¿¡ ÀúÀå
-		// project °æ·Î°¡ ¾Æ´Ñ OS°¡ ÀÌ¿ëÇÏ´Â °æ·Î
+			//1. fileì„ hddì— ì €ì¥
+			// project ê²½ë¡œê°€ ì•„ë‹Œ OSê°€ ì´ìš©í•˜ëŠ” ê²½ë¡œ
 		String realPath=servletContext.getRealPath("resources/upload/bankBook");
 		System.out.println(realPath);
 		String fileName =fileManager.fileSave(pic, realPath);
 		
-		//2. db¿¡ ÀúÀå
+		//2. dbì— ì €ì¥
 		BankBookImgDTO bankBookimgDTO = new BankBookImgDTO();
 		bankBookimgDTO.setFileName(fileName);
 		bankBookimgDTO.setOriName(pic.getOriginalFilename());

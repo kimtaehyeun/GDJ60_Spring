@@ -21,9 +21,9 @@ public class MemberService {
 		return memberDAO.getMemberList();
 	}
 	public MemberDTO getMemberLogin(MemberDTO memberDTO) throws Exception{
-		//memberDTO : Client ¿¡¼­ ÀÔ·ÂÇÑ id pw
+		//memberDTO : Client ì—ì„œ ì…ë ¥í•œ id pw
 		MemberDTO  result =memberDAO.getMemberLogin(memberDTO);
-		//result : id ¿Í ÀÏÄ¡ÇÏ´Â ¸ğµçÁ¤º¸
+		//result : id ì™€ ì¼ì¹˜í•˜ëŠ” ëª¨ë“ ì •ë³´
 		
 		//pw check
 		if(result != null &&memberDTO.getPw().equals(result.getPw())) {

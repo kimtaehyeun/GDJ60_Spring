@@ -34,12 +34,12 @@ public class ProductController{
 //		System.out.println("product List");
 		// 		prefix											suffix
 		//WEB-INF/views/+"product/productList"+.jsp
-		return mv;//ÁÖ¼Ò·Î ¸®ÅÏ
+		return mv;//ì£¼ì†Œë¡œ ë¦¬í„´
 	}
 	//getProductDetail
 	@RequestMapping(value = "detail")
 	public String getProductDetail(ProductDTO productDTO, Model model) throws Exception{
-		//ÆÄ¶ó¹ÌÅÍ ÀÌ¸§°ú setterÀÇ ÀÌ¸§ÀÌ °°¾Æ¾ßÇÔ
+		//íŒŒë¼ë¯¸í„° ì´ë¦„ê³¼ setterì˜ ì´ë¦„ì´ ê°™ì•„ì•¼í•¨
 		System.out.println("product detail");
 		productDTO = productService.getProductDetail(productDTO);
 		
@@ -51,7 +51,7 @@ public class ProductController{
 	
 	@RequestMapping(value = "productAdd" , method = RequestMethod.GET)
 	public void setProductAdd() {
-		//return °ªÀÌ ¾øÀ¸¸é url ÁÖ¼Ò¸¦ °¡Áö°í Ã£´Â´Ù.
+		//return ê°’ì´ ì—†ìœ¼ë©´ url ì£¼ì†Œë¥¼ ê°€ì§€ê³  ì°¾ëŠ”ë‹¤.
 	}
 	@RequestMapping(value = "productAdd", method = RequestMethod.POST)
 	public String productAdd(ProductDTO productDTO) throws Exception {

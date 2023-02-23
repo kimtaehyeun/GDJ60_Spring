@@ -11,25 +11,25 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class FileManager {
 
-	//FILEÀ» HDD¿¡ ÀúÀå
+	//FILEì„ HDDì— ì €ì¥
 	public String fileSave(MultipartFile multipartFile, String path) throws Exception{
-		//			1. ¾îµğ¿¡ ÀúÀåÇÒ°ÍÀÎ°¡?
+		//			1. ì–´ë””ì— ì €ì¥í• ê²ƒì¸ê°€?
 		//			/resources/upload/bankbook/...
-		//			2. ÀúÀå°ü¸®´Â ¿î¿µÃ¼Á¦ ´ã´ç
+		//			2. ì €ì¥ê´€ë¦¬ëŠ” ìš´ì˜ì²´ì œ ë‹´ë‹¹
 		File file = new File(path);
-		//Æú´õ°¡ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é Æú´õ »ı¼º.
+		//í´ë”ê°€ ì¡´ì¬í•˜ì§€ ì•Šìœ¼ë©´ í´ë” ìƒì„±.
 		if(!file.exists()) {
 			file.mkdirs();
 		}
 		//			3. make fileName
-		//			Áßº¹µÇÁö ¾Ê´Â ÆÄÀÏ¸í »ı¼º
+		//			ì¤‘ë³µë˜ì§€ ì•ŠëŠ” íŒŒì¼ëª… ìƒì„±
 //		Calendar ca = Calendar.getInstance();
 //		Long a = ca.getTimeInMillis();
 		
 		String name= UUID.randomUUID().toString();
 		
-		//			4. È®ÀåÀÚ Ãß°¡
-		//originalName + subStringÀ» ÀÌ¿ëÇÏ¿© È®ÀåÀÚ ÃßÃâ
+		//			4. í™•ì¥ì ì¶”ê°€
+		//originalName + subStringì„ ì´ìš©í•˜ì—¬ í™•ì¥ì ì¶”ì¶œ
 		
 		//name + originalName 
 		name= name+"_"+multipartFile.getOriginalFilename();
@@ -38,10 +38,10 @@ public class FileManager {
 		//			5. file save
 		file = new File(file, name);
 		
-		//1) multifile °´Ã¼ÀÇ transferTo ¸Ş¼­µå »ç¿ë
+		//1) multifile ê°ì²´ì˜ transferTo ë©”ì„œë“œ ì‚¬ìš©
 //		multipartFile.transferTo(file);
 		
-		//2)Sping API FileCopyUtis °´Ã¼ÀÇ copy¸Ş¼­µå »ç¿ë(staticmethod)
+		//2)Sping API FileCopyUtis ê°ì²´ì˜ copyë©”ì„œë“œ ì‚¬ìš©(staticmethod)
 		FileCopyUtils.copy(multipartFile.getBytes(), file);
 		return name;
 	}

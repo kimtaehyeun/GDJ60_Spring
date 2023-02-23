@@ -27,9 +27,9 @@ public class ProductService {
 	}
 
 
-	//service ==> dao ·Î º¸³»°Å³ª ¹Ş´Â ¿ªÈ°
+	//service ==> dao ë¡œ ë³´ë‚´ê±°ë‚˜ ë°›ëŠ” ì—­í™œ
 	public int setProductAdd(ProductDTO productDTO,List<ProductOptionDTO> ar) throws Exception{
-		//productÅ×ÀÌºí¿¡ »óÇ°µî·Ï ¹× ¿É¼Ç µî·Ï
+		//productí…Œì´ë¸”ì— ìƒí’ˆë“±ë¡ ë° ì˜µì…˜ ë“±ë¡
 		Long productNum = productDAO.getProductNum();
 		productDTO.setProductNum(productNum);
 		int result = productDAO.setProductAdd(productDTO);
