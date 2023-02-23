@@ -13,6 +13,7 @@ result.addEventListener("click",function(e){
     // console.log(e.currentTarget,e.target);
     console.log("currunt : ",e.currentTarget);
     console.log("target : ",e.target);
+    
     // console.log(e.target.classList.contains("dels"));
     if(e.target.classList.contains('dels')){
         let id=e.target.getAttribute("data-delete-id");

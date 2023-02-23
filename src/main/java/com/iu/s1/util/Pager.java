@@ -98,12 +98,7 @@ public class Pager {
 
 	}
 
-	public Long getBookNumber() {
-		return bookNumber;
-	}
-	public void setBookNumber(Long bookNumber) {
-		this.bookNumber = bookNumber;
-	}
+	
 	public Long getPerPage() {
 		if(this.perPage==null||this.perPage==0) {
 			this.perPage=10L;
@@ -192,5 +187,10 @@ public class Pager {
 	public void setSearch(String search) {
 		this.search = search;
 	}
-	
+	public Long getBookNumber() {
+		return bookNumber;
+	}
+	public void setBookNumber(Long bookNumber) {
+		this.bookNumber = bookNumber;
+	}
 }

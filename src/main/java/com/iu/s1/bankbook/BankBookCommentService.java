@@ -2,32 +2,28 @@ package com.iu.s1.bankbook;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.iu.s1.board.BbsDAO;
 import com.iu.s1.board.BbsDTO;
+import com.iu.s1.board.BbsService;
 import com.iu.s1.util.Pager;
-
-@Repository
-public class BankBookCommentDAO implements BbsDAO{
-
+@Service
+public class BankBookCommentService implements BbsService {
+	
 	@Autowired
-	private SqlSession sqlSession;	//database-context beans
-	private final String NAMESPACE = "com.iu.s1.bankbook.BankBookCommentDAO.";
+	private BbsDAO bankBookCommentDAO;
+//	private BankBookCommentDAO bankBookCommentDAO;
 	
-	
-	@Override
-	public Long getTotalCount(Pager pager) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE+"getTotalCount", pager);
-	}
-
 	@Override
 	public List<BbsDTO> getBoardList(Pager pager) throws Exception {
+		pager.makeRow();
 		
-		return sqlSession.selectList(NAMESPACE+"getBoardList", pager);
+		Long result =bankBookCommentDAO.getTotalCount(pager);
+		pager.makeNum(result);
+		
+		return bankBookCommentDAO.getBoardList(pager);
 	}
 
 	@Override
@@ -47,6 +43,5 @@ public class BankBookCommentDAO implements BbsDAO{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
+
 }
