@@ -36,4 +36,12 @@ SELECT * FROM (
 		WHERE R BETWEEN #{startRow} AND #{lastRow}
 
 </select>
+<select id="getBoardDetail" parameterType="BoardDTO" resultType="NoticeDTO">
+	SELECT * FROM NOTICE WHERE NUM=#{num}
+</select>
+<insert id="setBoardAdd" parameterType="BbsDTO">
+	INSERT INTO notice(num,title,contents,writer,regdate, hit) 
+values(NOTICE_SEQ.NEXTVAL,#{title},#{contents},#{writer},SYSDATE,0)
+</insert>
+
 </mapper>

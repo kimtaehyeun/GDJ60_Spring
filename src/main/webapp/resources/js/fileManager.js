@@ -1,5 +1,6 @@
 const fileList=window.document.getElementById("fileList");
 const btn=window.document.getElementById("btn");
+
 let click=0;
 let maxclick=1;
 let param='pic';
@@ -10,6 +11,8 @@ function setParam(p){
 function setMax(m){
     maxclick=m;
 }
+
+
 
 btn.addEventListener('click',function(){
 

@@ -15,6 +15,7 @@ public class QnaDTO extends BoardDTO{
 			this.ref = ref;
 		}
 		public Long getStep() {
+			
 			return step;
 		}
 		public void setStep(Long step) {
