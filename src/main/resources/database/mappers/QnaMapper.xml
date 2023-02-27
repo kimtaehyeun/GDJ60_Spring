@@ -34,9 +34,32 @@
 		)
 		WHERE R BETWEEN #{startRow} AND #{lastRow}
   </select>
-  <select id="getBoardDetail" parameterType="BoardDTO" resultType="QnaDTO">
-  select * from QNA where num=#{num}
+  <select id="getBoardDetail" parameterType="BoardDTO" resultMap="getBoardDetailResult">
+  SELECT * FROM qna q
+LEFT OUTER JOIN
+QNAFILES f 
+on(q.num = f.NUM)
+WHERE q.num=#{num}
   </select>
+  
+  <resultMap type="QnaDTO" id="getBoardDetailResult">
+  		<id column="num" property="num"/>
+  		<result column="title" property="title"/>
+  		<result column="writer" property="writer"/>
+  		<result column="contents" property="contents"/>
+  		<result column="regDate" property="regDate"/>
+  		<result column="hit" property="hit"/>
+  		<result column="depth" property="depth"/>
+  		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+  		<!-- property = 타입의 멤버메서드 중에서 setter와 같은거(setBoardFileDTOs)에서 set을뺴고 앞글자 소문자 -->
+  		<!-- javaType은 property의 반환할 타입 자체  : (boardFileDTOs의 타입명)-->
+  		<!-- ofType 반환할 타입의 제네릭 타입(ex : (List의 들어갈 타입 명)) -->
+  			<id column="fileNum" property="fileNum"/>
+  			<!-- <result column="num"/>  사용안해도됨 : 위에서 동일한 데이터를 사용하기 때문-->
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</collection>
+  </resultMap>
   
 <insert id="setBoardAdd" parameterType="BbsDTO">
   		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
@@ -45,13 +68,25 @@
   		INSERT INTO QNA (NUM, TITLE, CONTENTS, WRITER, REGDATE, HIT, REF, STEP, DEPTH)
   		VALUES(#{num}, #{title}, #{contents}, #{writer}, sysdate,0, #{num}, 0, 0)
   	</insert>
-  
+<insert id="setBoardFileAdd" parameterType="BoardFileDTO">
+	INSERT INTO QNAFILES(FILENUM, NUM, FILENAME, ORINAME)
+	VALUES(QNA_SEQ.NEXTVAL,#{num},#{fileName},#{oriName})
+</insert>
   <update id="setStepUpdate" parameterType="QnaDTO">
   	UPDATE QNA SET STEP = STEP+1
   	where ref = #{ref} and step >#{step}
   </update>
+  
   <insert id="setReplyAdd" parameterType="QnaDTO">
   	INSERT INTO QNA (NUM, TITLE, CONTENTS, WRITER, REGDATE, HIT, REF, STEP, DEPTH)
   		VALUES(QNA_SEQ.NEXTVAL, #{title}, #{contents}, #{writer}, sysdate,0, #{ref},#{step},#{depth})
   </insert>
+  
+  <delete id="setBoardDelete" parameterType="BbsDTO">
+  DELETE QNA WHERE NUM=#{num}
+  </delete>
+  
+  <select id="getBoardFileList" resultType="BoardFileDTO" parameterType="BbsDTO" >
+  SELECT * FROM QNAFILES WHERE NUM=#{num}
+  </select>
   </mapper>

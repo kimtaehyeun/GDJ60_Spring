@@ -2,6 +2,8 @@ package com.iu.s1.board.qna;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s1.board.BbsDTO;
@@ -46,9 +49,8 @@ public class QnaController {
 		return mv;
 	}
 	@PostMapping("add")
-	public ModelAndView setBoardAdd(QnaDTO qnaDTO, ModelAndView mv)throws Exception{
-		int result = qnaService.setBoardAdd(qnaDTO);
-		
+	public ModelAndView setBoardAdd(QnaDTO qnaDTO, ModelAndView mv, MultipartFile [] files, HttpSession session)throws Exception{
+		int result = qnaService.setBoardAdd(qnaDTO, files, session);
 		String message="실패";
 		if(result>0) {
 			message="성공";
@@ -87,4 +89,19 @@ public class QnaController {
 	      mv.setViewName("common/result");
 		return mv;
 	}
+	@PostMapping("delete")
+	public ModelAndView setBoardDelete(BbsDTO bbsDTO, ModelAndView mv, HttpSession session)throws Exception{
+		mv.setViewName("common/result");
+		int result = qnaService.setBoardDelete(bbsDTO, session);
+		String message="삭제 실패";
+		if(result>0) {
+			message="삭제 성공";
+		}
+		
+		mv.addObject("result", message);
+		mv.addObject("url", "./list");
+		return mv;
+		
+	}
+	@GetMapping("fileDown")
 }

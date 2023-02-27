@@ -99,9 +99,15 @@
 						</button>
 				</div>
 			</form>
+			<div class="row">
+				<a href="./add" class="btn btn-primary">글작성</a>
+			</div>
 		</div>
 </div>
 <c:import url="../template/common_js.jsp"></c:import>
 <script src="../resources/js/pageing.js"></script>
+<script>
+	setData('${pager.search}')
+</script>
 </body>
 </html>

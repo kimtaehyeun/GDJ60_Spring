@@ -4,44 +4,80 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iu.s1.board.notice.NoticeDAO">
 
-<sql id="noticeCondition">
-	<where>
-		<if test="kind=='title'">
-			TITLE LIKE '%'||#{search}||'%'
-		</if>
-		<if test="kind=='writer'">
-			WRITER LIKE '%'||#{search}||'%'
-		</if>
-	
-		<if test="kind=='contents'">
-			CONTENTS LIKE '%'||#{search}||'%'
-		</if>
-	
-	</where>
-</sql>
+	<sql id="noticeCondition">
+		<where>
+			<if test="kind=='title'">
+				TITLE LIKE '%'||#{search}||'%'
+			</if>
+			<if test="kind=='writer'">
+				WRITER LIKE '%'||#{search}||'%'
+			</if>
 
-<select id="getTotalCount" parameterType="Pager" resultType="Long">
-SELECT COUNT(NUM) FROM NOTICE
-<include refid="noticeCondition"></include>
+			<if test="kind=='contents'">
+				CONTENTS LIKE '%'||#{search}||'%'
+			</if>
 
-</select>
-<select id="getBoardList" parameterType="Pager" resultType="NoticeDTO">
-SELECT * FROM ( 
-			SELECT ROWNUM R, C.* FROM		(
-				 SELECT NUM,TITLE,CONTENTS,WRITER,REGDATE,HIT FROM NOTICE
-				<include refid="noticeCondition"></include>
-				ORDER BY NUM DESC
-			) C
+		</where>
+	</sql>
+
+	<select id="getTotalCount" parameterType="Pager"
+		resultType="Long">
+		SELECT COUNT(NUM) FROM NOTICE
+		<include refid="noticeCondition"></include>
+
+	</select>
+	<select id="getBoardList" parameterType="Pager"
+		resultType="NoticeDTO">
+		SELECT * FROM (
+		SELECT ROWNUM R, C.* FROM (
+		SELECT NUM,TITLE,CONTENTS,WRITER,REGDATE,HIT FROM NOTICE
+		<include refid="noticeCondition"></include>
+		ORDER BY NUM DESC
+		) C
 		)
 		WHERE R BETWEEN #{startRow} AND #{lastRow}
 
-</select>
-<select id="getBoardDetail" parameterType="BoardDTO" resultType="NoticeDTO">
-	SELECT * FROM NOTICE WHERE NUM=#{num}
-</select>
-<insert id="setBoardAdd" parameterType="BbsDTO">
-	INSERT INTO notice(num,title,contents,writer,regdate, hit) 
-values(NOTICE_SEQ.NEXTVAL,#{title},#{contents},#{writer},SYSDATE,0)
-</insert>
+	</select>
+	<select id="getBoardDetail" parameterType="BoardDTO"
+		resultMap="getBoardDetail">
+		SELECT * FROM NOTICE n
+		LEFT OUTER JOIN
+		NOTICEFILES F
+		ON(n.NUM=F.NUM)
+		WHERE n.NUM =#{num}
+	</select>
+	<select id="getBoardFileList" parameterType="BbsDTO" resultType="BoardFileDTO">
+		select * from NoticeFiles where num = #{num}
+	</select>
+	<resultMap type="NoticeDTO" id="getBoardDetail">
+		<id column="num" property="num" />
+		<result column="title" property="title" />
+		<result column="contents" property="contents" />
+		<result column="writer" property="writer" />
+		<result column="regDate" property="regDate" />
+		<result column="HIT" property="hit" />
+		<collection property="boardFileDTOs" javaType="List"
+			ofType="BoardFIleDTO">
+			<id column="filenum" property="fileNum" />
+			<result column="filename" property="fileName" />
+			<result column="oriname" property="oriName" />
+		</collection>
+	</resultMap>
+	<insert id="setBoardAdd" parameterType="BbsDTO">
+		<selectKey keyProperty="num" resultType="Long"
+			order="BEFORE">
+			SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO notice(num,title,contents,writer,regdate, hit)
+		values(#{num},#{title},#{contents},#{writer},SYSDATE,0)
+	</insert>
+
+	<insert id="setBoardFileAdd" parameterType="BoardFileDTO">
+		INSERT INTO NOTICEFILES (FILENUM,NUM,FILENAME,ORINAME)
+		VALUES (NOTICE_SEQ.NEXTVAL,#{num},#{fileName},#{oriName})
+	</insert>
+	<delete id="setBoardDelete" parameterType="BbsDTO">
+		DELETE NOTICE WHERE NUM = #{num}
+	</delete>
 
 </mapper>

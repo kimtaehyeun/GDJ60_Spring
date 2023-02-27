@@ -2,13 +2,17 @@ package com.iu.s1.board.notice;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s1.board.BbsDTO;
@@ -43,8 +47,8 @@ public class NoticeController {
 		return mv;
 	}
 	@PostMapping("add")
-	public ModelAndView setBoardAdd(NoticeDTO noticeDTO, ModelAndView mv) throws Exception{
-		int result = noticeService.setBoardAdd(noticeDTO);
+	public ModelAndView setBoardAdd(NoticeDTO noticeDTO, ModelAndView mv,HttpSession session, MultipartFile []  files) throws Exception{
+		int result = noticeService.setBoardAdd(noticeDTO,files,session);
 
 		String message="등록실패";
 		if(result>0) {
@@ -57,9 +61,23 @@ public class NoticeController {
 	}
 	@GetMapping("detail")
 	public ModelAndView getBoardDetail(NoticeDTO noticeDTO, ModelAndView mv)throws Exception{
-		BoardDTO boardDTO=noticeService.getBoardDetail(noticeDTO);
+		
+		BoardDTO boardDTO= noticeService.getBoardDetail(noticeDTO);
 		mv.addObject("dto", boardDTO);
 		mv.setViewName("board/detail");
+		return mv;
+	}
+	@PostMapping("delete")
+	public ModelAndView setBoardDelete(NoticeDTO noticeDTO, ModelAndView mv, HttpSession session)throws Exception{
+		int result =noticeService.setBoardDelete(noticeDTO, session);
+		String mes = "삭제실패";
+		if(result>0) {
+			mes = "삭제성공";
+					
+		}
+		mv.addObject("result", mes);
+		mv.addObject("url", "./list");
+		mv.setViewName("common/result");
 		return mv;
 	}
 }
