@@ -80,4 +80,7 @@
 		DELETE NOTICE WHERE NUM = #{num}
 	</delete>
 
+  <select id="getBoardFileDetail" resultType="BoardFileDTO" parameterType="BoardFileDTO">
+  SELECT * FROM NOTICEFILES WHERE FILENUM =#{fileNum}
+  </select>
 </mapper>
