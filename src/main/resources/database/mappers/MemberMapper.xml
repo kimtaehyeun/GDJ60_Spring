@@ -15,9 +15,29 @@
 	<insert id="setMemberRoleAdd" parameterType="MemberDTO">
 		INSERT INTO MEMBER_ROLE (ID, ROLENUM) VALUES(#{id},(SELECT ROLENUM FROM "ROLE" WHERE ROLENAME='MEMBER') )
 	</insert>
-	<select id="getMemberLogin" parameterType="MemberDTO" resultType="MemberDTO">
-		SELECT * FROM "MEMBER" WHERE ID=#{id}
+	
+	<select id="getMemberLogin" parameterType="MemberDTO" resultMap="getMemeberDetail">
+		SELECT m.*,r.* FROM "MEMBER" m 
+INNER JOIN
+MEMBER_ROLE mr 
+on(m.ID=mr.ID)
+INNER JOIN
+"ROLE" r 
+on(mr.ROLENUM=r.ROLENUM)
+WHERE m.ID =#{id}
 	</select>
+	<resultMap type="MemberDTO" id="getMemeberDetail">
+		<id column="ID" property="id"/>
+		<result column="pw" property="pw"/>
+		<result column="name" property="name"/>
+		<result column="address" property="address"/>
+		<result column="phone" property="phone"/>
+		<result column="email" property="email"/>
+		<collection property="roleDTO" javaType="RoleDTO">
+			<id column="rolenum" property="roleNum"/>
+			<result column="roleName" property="roleName"/>
+		</collection>
+	</resultMap>
 	
 	<update id="setMemberUpdate" parameterType="MemberDTO">
 	UPDATE "MEMBER" SET NAME=#{name},ADDRESS=#{address},PHONE=#{phone},EMAIL=#{email} WHERE ID=#{id}

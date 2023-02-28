@@ -22,7 +22,7 @@
 		<form class="col-md-7" action="./add" method="post" enctype="multipart/form-data">
 			<div class="mb-3">
 			  <label for="writer" class="form-label">작성자</label>
-			  <input type="text" name="writer" class="form-control" id="writer">
+			  <input type="text" name="writer" class="form-control" id="writer" value="${member.id}" readonly="readonly">
 			</div>
 			
 			<div class="mb-3">

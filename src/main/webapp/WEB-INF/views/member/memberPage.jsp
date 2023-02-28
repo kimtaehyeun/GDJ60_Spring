@@ -20,6 +20,9 @@
 			<h3>${dto.address}</h3>
 			<h3>${dto.phone}</h3>
 			<h3>${dto.email}</h3>
+			<h3>${dto.roleDTO.roleName}</h3>
+			
+			
 			<a href="/member/memberUpdate">수정</a>
 		</div>
 	</div>
