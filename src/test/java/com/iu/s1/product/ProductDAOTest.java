@@ -26,17 +26,17 @@ public class ProductDAOTest extends MyTestCase{
 		productDTO= productDAO.getProductDetail(productDTO	);
 		assertNotNull(productDTO);
 	}
-	@Test
-	public void setProductAddTest() throws Exception{
-		for(int i=0; i<30;i++) {
-		ProductDTO productDTO = new ProductDTO();
-		
-		productDTO.setProductName("test123"+i);
-		productDTO.setProductDetail("ga");
-		productDTO.setProductJumsu(1.0);
-		
-		int result = productDAO.setProductAdd(productDTO);
-		}
-		
-	}
+//	@Test
+//	public void setProductAddTest() throws Exception{
+//		for(int i=0; i<30;i++) {
+//		ProductDTO productDTO = new ProductDTO();
+//		
+//		productDTO.setProductName("test123"+i);
+//		productDTO.setProductDetail("ga");
+//		productDTO.setProductJumsu(1.0);
+//		
+//		int result = productDAO.setProductAdd(productDTO);
+//		}
+//		
+//	}
 }

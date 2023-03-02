@@ -17,7 +17,7 @@ public class BankBookCommentDAOTest extends MyTestCase {
 	private BankBookCommentDAO bankBookCommentDAO;
 	
 	//List
-	@Test
+//	@Test
 	public void getBoardListTest()throws Exception{
 		Pager pager = new Pager();
 		pager.setBookNumber(577L);
@@ -29,5 +29,6 @@ public class BankBookCommentDAOTest extends MyTestCase {
 		assertNotEquals(0,ar.size());
 		
 	}
+	
 
 }

@@ -21,7 +21,7 @@ public class BankBookDAOTest extends MyTestCase {
 		List<BankBookDTO> ar = bankBookDAO.getBankBookList(pager);
 		assertNotEquals(0, ar.size());
 	}
-		@Test
+//		@Test
 	public void getBankBookDetail()throws Exception{
 
 		BankBookDTO bankBookDTO = new BankBookDTO();

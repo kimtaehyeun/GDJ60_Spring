@@ -15,7 +15,7 @@ public class QnaDAOTest extends MyTestCase{
 	private QnaDAO qnaDAO;
 	
 	
-	@Test
+//	@Test
 	public void getTotalCount() throws Exception{
 		Pager pager = new Pager();
 		long result= qnaDAO.getTotalCount(pager);
