@@ -27,9 +27,30 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/qna/*"/>
+			<mapping path="/member/*"/>
+			<exclude-mapping path="/member/memberLogin"/>
+			<exclude-mapping path="/member/memberJoin"/>
+			<exclude-mapping path="/member/memberAgree"/>
 			<exclude-mapping path="/qna/list"/>
 			<beans:ref bean="memberCheckInterceptor"/>
 		</interceptor>
+		<interceptor>
+			<mapping path="/notice/*"/>
+			<exclude-mapping path="/notice/list"/>
+			<exclude-mapping path="/notice/detail"/>
+			<beans:bean class="com.iu.s1.interceptors.AdminCheckInterceptor"></beans:bean>
+			<!-- <beans:ref bean="adminCheckInterceptor"/>앞글자 소문자  xml에서 bean생성 가능 @Component 생성 안해도됨-->
+		</interceptor>
+		<interceptor>
+		<mapping path="/qna/update"/>
+		<mapping path="/notice/update"/>
+		<mapping path="/qna/delete"/>
+		<mapping path="/notice/delete"/>
+		<beans:ref bean="ownerCheckInterceptor"/>
+		</interceptor>
+		
+	
+		
 	</interceptors>
 	<context:component-scan base-package="com.iu.s1" />
 	

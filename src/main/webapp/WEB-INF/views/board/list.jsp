@@ -112,13 +112,13 @@
 				</div>
 			</form>
 			<c:if test="${not empty member}">
-				<c:if test="${boardName eq 'notice' and member.roleDTO.roleNum < 3}">
+				<c:if test="${boardName eq 'notice' and member.roleDTO.roleNum < 2}">
 					<div class="row">
 						<a href="./add" class="btn btn-primary">글작성</a>
 					</div>
 					<h3>${dto.roleDTO.roleName}</h3>
 				</c:if>
-				<c:if test="${boardName eq 'qna' and member.roleDTO.roleNum < 2}">
+				<c:if test="${boardName eq 'qna' and member.roleDTO.roleNum < 4}">
 					<div class="row">
 						<a href="./add" class="btn btn-primary">글작성</a>
 					</div>

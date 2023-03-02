@@ -62,7 +62,7 @@ public class NoticeController {
 	}
 	@GetMapping("detail")
 	public ModelAndView getBoardDetail(NoticeDTO noticeDTO, ModelAndView mv)throws Exception{
-		
+
 		BoardDTO boardDTO= noticeService.getBoardDetail(noticeDTO);
 		mv.addObject("dto", boardDTO);
 		mv.setViewName("board/detail");
@@ -74,7 +74,7 @@ public class NoticeController {
 		String mes = "삭제실패";
 		if(result>0) {
 			mes = "삭제성공";
-					
+
 		}
 		mv.addObject("result", mes);
 		mv.addObject("url", "./list");
@@ -86,6 +86,13 @@ public class NoticeController {
 		boardFileDTO= noticeService.getBoardFileDetail(boardFileDTO);
 		mv.addObject("boardFile", boardFileDTO);
 		mv.setViewName("fileDownView");
+		return mv;
+	}
+	@GetMapping("update")
+	public ModelAndView setBoardUpdate(ModelAndView mv,BoardDTO boardDTO) throws Exception{
+		boardDTO= noticeService.getBoardDetail(boardDTO);
+		mv.addObject("dto", boardDTO);
+		mv.setViewName("board/update");
 		return mv;
 	}
 }

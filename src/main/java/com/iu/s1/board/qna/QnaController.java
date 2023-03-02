@@ -113,4 +113,12 @@ public class QnaController {
 		mv.setViewName("fileDownView");
 		return mv;
 	}
+	@GetMapping("update")
+	public ModelAndView setBoardUpdate(ModelAndView mv,BoardDTO boardDTO) throws Exception{
+		boardDTO= qnaService.getBoardDetail(boardDTO);
+		mv.addObject("dto",boardDTO);
+		mv.setViewName("board/update");
+		return mv;
+	}
+	
 }

@@ -83,4 +83,10 @@
   <select id="getBoardFileDetail" resultType="BoardFileDTO" parameterType="BoardFileDTO">
   SELECT * FROM NOTICEFILES WHERE FILENUM =#{fileNum}
   </select>
+  <!-- <update id="setBoardUpdate">
+  UPDATE NOTICE SET title=#{title}, CONTENTS =#{contents},WRITER =#{writer} WHERE NUM =#{num}
+  </update>
+  <update id="setBoardFileUpdate">
+  
+  </update> -->
 </mapper>
