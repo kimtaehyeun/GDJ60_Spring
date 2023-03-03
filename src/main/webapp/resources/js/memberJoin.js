@@ -36,6 +36,39 @@ let checks=[false,false,false,false,false,false,false]
 
 
 id.addEventListener("blur",function(){
+    //중복검사
+    //1. 객체생성
+    let xhttp = new XMLHttpRequest();
+    //2. url, method 정보 넣기
+    xhttp.open("POST","./memberIdCheck");
+    //3. header정보 셋팅
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    //4. 요청 발생 POST일 경우 parameter전송
+    xhttp.send("id="+id.value);//dto의 setter이름
+                //-----
+    //5. 응답 처리
+    xhttp.addEventListener("readystatechange",function(){
+        if(this.readyState==4&&this.status==200){
+            if(this.responseText.trim()=='true'){
+                idcheck.classList.remove("redResult")
+                idcheck.classList.add("blueResult")
+                idcheck.innerHTML="사용 가능한 id"
+                
+            }
+            else{
+                idcheck.classList.remove("blueResult")
+                idcheck.classList.add("redResult")
+                idcheck.innerHTML="중복된 아이디입니다."
+                
+            }
+        }
+        else if(this.readyState==4&&this.status!=200){
+
+        }
+    })
+
+
+
     if(id.value==0||id.value==null){
         
         // stack1=false;

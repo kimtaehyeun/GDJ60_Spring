@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.iu.s1.board.BbsDAO;
 import com.iu.s1.board.BbsDTO;
 import com.iu.s1.board.BbsService;
 import com.iu.s1.util.Pager;
@@ -16,7 +15,7 @@ import com.iu.s1.util.Pager;
 public class BankBookCommentService implements BbsService {
 	
 	@Autowired
-	private BbsDAO bankBookCommentDAO;
+	private BankBookCommentDAO bankBookCommentDAO;
 //	private BankBookCommentDAO bankBookCommentDAO;
 	
 	@Override
@@ -42,7 +41,7 @@ public class BankBookCommentService implements BbsService {
 	@Override
 	public int setBoardAdd(BbsDTO bbsDTO, MultipartFile[] multipartFiles, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return bankBookCommentDAO.setBoardAdd(bbsDTO);
 	}
 
 
@@ -53,5 +52,12 @@ public class BankBookCommentService implements BbsService {
 		return 0;
 	}
 
+
+
+
+
+
+
+	
 	
 }
