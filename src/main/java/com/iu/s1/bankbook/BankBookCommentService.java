@@ -16,7 +16,7 @@ public class BankBookCommentService implements BbsService {
 	
 	@Autowired
 	private BankBookCommentDAO bankBookCommentDAO;
-//	private BankBookCommentDAO bankBookCommentDAO;
+
 	
 	@Override
 	public List<BbsDTO> getBoardList(Pager pager) throws Exception {

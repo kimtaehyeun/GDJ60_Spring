@@ -1,9 +1,9 @@
 const btn = document.getElementById("btn")
 const textArea= document.getElementById("textArea")
-
-
-
-
+const parent = document.getElementById("parent");
+const commentList=document.getElementById("commentList");
+let page=1;
+getList(page);
 btn.addEventListener("click",function(){
     
     let xhttp= new XMLHttpRequest();// url method parametter
@@ -14,7 +14,7 @@ btn.addEventListener("click",function(){
         if(this.readyState==4&& this.status==200){
            if(this.responseText.trim()==1){
             alert("댓글등록")
-            getList();
+            getList(page);
            } 
            else{
             alert("댓글 실패")
@@ -24,14 +24,19 @@ btn.addEventListener("click",function(){
     })
     
 })
-function getList(){
-let xhttp= new XMLHttpRequest();// url method parametter
-xhttp.open("GET",'../bankBookComment/list?bookNumber='+btn.getAttribute('data-book-bookNumber'));
-xhttp.send();
-xhttp.addEventListener('readystatechange',function(){
-    if(this.readyState==4&& this.status==200){
-        
-        document.getElementById("commentList").innerHTML=this.responseText.trim();
-    }
-})
+
+function getList(page){
+    let xhttp= new XMLHttpRequest();// url method parametter
+    xhttp.open("GET",'../bankBookComment/list?bookNumber='+btn.getAttribute('data-book-bookNumber')+"&page="+page);
+    xhttp.send();
+    xhttp.addEventListener('readystatechange',function(){
+        if(this.readyState==4&& this.status==200){
+            
+            commentList.innerHTML=this.responseText.trim();
+        }
+    })
 }
+commentList.addEventListener("click",function(e){
+    if(e.target.getAttribute("data-board-page")!=null)
+     getList(e.target.getAttribute("data-board-page"));
+})
