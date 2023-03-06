@@ -1,166 +1,146 @@
-const btn = document.getElementById("btn")
-const textArea= document.getElementById("textArea")
-const parent = document.getElementById("parent");
-const commentList=document.getElementById("commentList");
+const replyAdd = document.getElementById("replyAdd");
+const replyContents = document.getElementById("replyContents");
+const commentListResult = document.getElementById("commentListResult");
+//const pageLink = document.querySelectorAll(".page-link");
 
-// const pageLink=document.querySelectorAll("page-link");
-let page=1;
-getList(page);
-btn.addEventListener("click",function(){
-    
-    let xhttp= new XMLHttpRequest();// url method parametter
-    xhttp.open("POST",'../bankBookComment/add'); 
+const contentsConfirm = document.getElementById('contentsConfirm');
+const closeModal = document.getElementById('closeModal');
+
+
+replyAdd.addEventListener("click", function(){
+
+    let xhttp = new XMLHttpRequest();
+
+    xhttp.open("POST", "../bankBookComment/add");
+
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("contents="+textArea.value+"&bookNumber="+btn.getAttribute('data-book-bookNumber'));//파라미터 넣기
-    xhttp.addEventListener('readystatechange',function(){
-        if(this.readyState==4&& this.status==200){
-           if(this.responseText.trim()==1){
-            alert("댓글등록")
-            getList(page);
-           } 
-           else{
-            alert("댓글 실패")
-           }
-           
+
+    xhttp.send("contents="+replyContents.value+"&bookNumber="+replyAdd.getAttribute('data-book-bookNum'));
+
+    xhttp.addEventListener('readystatechange', function(){
+        if(this.readyState==4&&this.status==200){
+            if(this.responseText.trim()==1){
+                alert('댓글이 등록 되었습니다')
+                replyContents.value="";
+                getList();
+            }else {
+                alert('댓글 등록에 실패 했습니다')
+            }
+
         }
     })
-    
+
 })
+
+getList(1);
 
 function getList(page){
-    let xhttp= new XMLHttpRequest();// url method parametter
-    xhttp.open("GET",'../bankBookComment/list?bookNumber='+btn.getAttribute('data-book-bookNumber')+"&page="+page);
-    xhttp.send();
-    xhttp.addEventListener('readystatechange',function(){
-        if(this.readyState==4&& this.status==200){
-            
-            commentList.innerHTML=this.responseText.trim();
-        }
+
+    let count=0;
+
+    let xhttp = new XMLHttpRequest();
+
+    xhttp.open("GET", "/bankBookComment/list?bookNumber="+replyAdd.getAttribute('data-book-bookNum')+"&page="+page);
+
+    
+    xhttp.addEventListener("readystatechange", function(){
+        if(this.readyState==4&&this.status==200){
+            commentListResult.innerHTML=this.responseText.trim();
+            count++;
+        }        
     })
+    
+    xhttp.send();
+
+    //0이 출력 : 비동기 방식이기 때문
+    console.log("count : ", count);
+
 }
-commentList.addEventListener("click",function(e){
-    // if(e.target.getAttribute("data-board-page")!=null)
-    if(e.target.classList.contains("page-link"))
-     getList(e.target.getAttribute("data-board-page"));
 
-     e.preventDefault();
-})
+//page
+commentListResult.addEventListener("click", function(e){
+    let pageLink = e.target;
+    if(pageLink.classList.contains("page-link")){
+        let page = pageLink.getAttribute("data-board-page");
+        getList(page);
+    }
 
-// pageLink.forEach(function(e){
-//     console.log("p : ",p );
-// })
+    e.preventDefault();
+    
 
-//delete-------------------------------------------------------------------
+});
 
-commentList.addEventListener("click",function(e){
-    let deletebtn = e.target
-    if(deletebtn.classList.contains("del")){
-        let xhttp= new XMLHttpRequest();// url method parametter
-        xhttp.open("POST",'../bankBookComment/delete');
+//delete
+commentListResult.addEventListener("click", function(e){
+    let del = e.target;
+    if(del.classList.contains("del")){
+        let xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "../bankBookComment/delete");
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("num="+deletebtn.getAttribute("data-comment-num"));
-        xhttp.addEventListener('readystatechange',function(){
-            if(this.readyState==4&& this.status==200){
+        xhttp.send("num="+del.getAttribute("data-comment-num"));
+        xhttp.addEventListener("readystatechange", function(){
+            if(this.readyState==4&&this.status==200){
                 let result = this.responseText.trim();
                 if(result>0){
-                    alert("삭제성공");
-                    getList(page);
+                    alert('댓글이 삭제 되었습니다');
+                    getList(1);
+                }else {
+                    alert('삭제 실패');
                 }
-                else{
-                    alert("삭제 실패")
-                }
-            }
+                
+            }        
         })
-    }
-     
-})
-//------------------------------------------------------------------
-//update====================================================================
-commentListResult.addEventListener("click", function(e){
-    let updateButton = e.target;
-    if(updateButton.classList.contains("update")){
-        //console.log(updateButton.parentNode.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling);
-        let num = updateButton.getAttribute("data-comment-num");
-        let contents = document.getElementById("contents"+num);
-        // console.log(contents);
-        // contents.innerHTML='<textarea name="" id="" cols="30" rows="3">'+contents.innerHTML+'</textarea>';
-        contents.firstChild.removeAttribute("readonly");
-        let btn = document.createElement("button");
-        let attr = document.createAttribute("class");
-        attr.value="btn btn-primary";
-        btn.setAttributeNode(attr);
-        contents.appendChild(btn);
-        attr = document.createTextNode("확인");
-        btn.appendChild(attr);
-
-        btn.addEventListener("click", function(){
-            console.log(contents.firstChild.value);
-            console.log(num);
-
-            let xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "../bankBookComment/update");
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("num="+num+"&contents="+contents.firstChild.value);
-            xhttp.addEventListener("readystatechange", function(){
-                if(this.readyState==4&&this.status==200){
-                    let result = this.responseText.trim();
-                    if(result>0){
-                        alert('수정 성공');
-                        getList(1);
-                    }else {
-                        alert('수정 실패');
-                    }
-                    
-                }        
-            })
-
-        })
-       
     }
 
     e.preventDefault();
     
 });
 
+//update
+commentListResult.addEventListener("click", function(e){
+    let updateButton = e.target;
+    if(updateButton.classList.contains("update")){
+        
+        let num = updateButton.getAttribute("data-comment-num");
+        let contents = document.getElementById("contents"+num); //td
+        console.log(contents);
+        let contentsTextArea=document.getElementById("contents")//Modal textarea
+        console.log(contentsTextArea);
+        //value
+        contentsTextArea.value=contents.innerText;
+        contentsConfirm.setAttribute("data-comment-num", num);
+    }
+    
+    e.preventDefault();
+    
+});
 
 
-/*
-commentList.addEventListener("click",function(e){
-    let updatebtn = e.target
-    if(updatebtn.classList.contains("update")){
-        let xhttp= new XMLHttpRequest();
-        xhttp.open("GET",'../bankBookComment/update?num='+updatebtn.getAttribute("data-comment-num")+"&contents="+updatebtn.getAttribute("data-comment-contents"));
-        xhttp.send();
-        xhttp.addEventListener('readystatechange',function(){
-            if(this.readyState==4&& this.status==200){
-                commentList.innerHTML=this.responseText.trim();
+//
+contentsConfirm.addEventListener("click", function(){
+    console.log("Update Post");
+    let updateContents = document.getElementById("contents").value;
+    let num = contentsConfirm.getAttribute("data-comment-num");
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "../bankBookComment/update");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("num="+num+"&contents="+updateContents);
+    xhttp.addEventListener("readystatechange", function(){
+        if(this.readyState==4&&this.status==200){
+            let result = this.responseText.trim();
+            if(result>0){
+                alert('수정 성공');
+                closeModal.click();
+                getList(1);
+            }else {
+                alert('삭제 실패');
             }
-        })
-    }
-     
+            
+        }        
+    });
+    
 })
-//updatelist
-commentList.addEventListener("click",function(e){
-    let submitbtn = e.target
-    if(submitbtn.classList.contains("submitbtn")){
-        let xhttp= new XMLHttpRequest();
-        xhttp.open("POST",'../bankBookComment/update');
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("contents="+document.getElementById("contents").value+"&num="+submitbtn.getAttribute("data-comment-num"));
-        xhttp.addEventListener('readystatechange',function(){
-            if(this.readyState==4&& this.status==200){
-                let result = this.responseText.trim();
-                if(result>0){
-                    alert("수정성공");
-                    getList(page);
-                }
-                else{
-                    alert("수정실패")
-                }
-            }
-        })
-    }
-     
-})
-*/
-//==================================================
+
+
+
