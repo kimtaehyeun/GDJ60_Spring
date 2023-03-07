@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/common_css.jsp"></c:import>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 </head>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
@@ -33,46 +34,64 @@
 			href="./list">목록으로</a>
 	</div>
 
-	<div class="my-5" id="commentListResult">
-
-	</div>
+	<div class="my-5" id="commentListResult"></div>
 
 	<div class="my-5">
-		
+
 		<div class="mb-3">
 			<textarea class="form-control" rows="3" id="replyContents"></textarea>
 		</div>
 		<div class="mb-3">
-			<button type="button" class="btn btn-primary" id="replyAdd" data-book-bookNum="${dto.bookNumber}">댓글작성</button>
+			<button type="button" class="btn btn-primary" id="replyAdd"
+				data-book-bookNum="${dto.bookNumber}">댓글작성</button>
 		</div>
 
 	</div>
 
 	<!--  Update Form Modal -->
 	<!-- Modal -->
-	<div class="modal fade" id="contentsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="contentsModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-			<h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<div class="form-floating">
-					<textarea class="form-control" placeholder="Leave a comment here" id="contents"></textarea>
-					<label for="contents">Comments</label>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Modal
+						title</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="form-floating">
+						<textarea class="form-control" placeholder="Leave a comment here"
+							id="contents"></textarea>
+						<label for="contents">Comments</label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal" id="closeModal">Cancel</button>
+					<button type="button" class="btn btn-primary" data-comment-num=""
+						id="contentsConfirm">확인</button>
 				</div>
 			</div>
-			<div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModal">Cancel</button>
-			<button type="button" class="btn btn-primary" data-comment-num="" id="contentsConfirm">확인</button>
-			</div>
-		</div>
 		</div>
 	</div>
 
 
-	
+	<!-- Test후 삭제 할 영역 -->
+	<div class="my-5">
+		<button type="button" id="b1">BUTTON1</button>
+		<input type="text" id="t1">
+		<div class="my-5">
+			<input type="checkbox" class="ch" name="ch" id="" value="v1">
+			<input type="checkbox" class="ch" name="ch" id="" value="v2">
+			<input type="checkbox" class="ch" name="ch" id="" value="v3">
+			<input type="checkbox" class="ch" name="ch" id="" value="v4">
+			
+		</div>
+	</div>
+
+	<!------------------------------------>
 	<c:import url="../template/common_js.jsp"></c:import>
 	<script src="/resources/js/bankBookReply.js"></script>
 </body>

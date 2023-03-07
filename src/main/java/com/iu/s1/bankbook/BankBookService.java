@@ -21,7 +21,7 @@ public class BankBookService {
 	//testCase 테스트시 null이 들어옴
 	//test하려면 api추가해야함. = > test할땐 톰캣을 실행 안시키기 때문
 	
-//	@Autowired
+	@Autowired
 	private ServletContext servletContext;
 	
 	public List<BankBookDTO> getBankBookList(Pager pager)throws Exception{
@@ -40,7 +40,7 @@ public class BankBookService {
 		int result = bankBookDAO.setBankBookAdd(bankBookDTO);
 		
 		
-		if(!pic.isEmpty()) {
+		if(pic!=null&&!pic.isEmpty()) {
 			//1. file을 hdd에 저장
 			// project 경로가 아닌 OS가 이용하는 경로
 		String realPath=servletContext.getRealPath("resources/upload/bankBook");

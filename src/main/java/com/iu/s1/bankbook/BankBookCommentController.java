@@ -39,9 +39,9 @@ public class BankBookCommentController {
 		
 		ModelAndView mv = new ModelAndView();
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-//		bankBookCommentDTO.setWriter(memberDTO.getId());
+		bankBookCommentDTO.setWriter(memberDTO.getId());
 //		
-		bankBookCommentDTO.setWriter("d");
+//		bankBookCommentDTO.setWriter("d");
 		int result = bankBookCommentService.setBoardAdd(bankBookCommentDTO, null, session);
 		mv.addObject("result", result);
 		mv.setViewName("common/result2");
