@@ -148,6 +148,11 @@ public class QnaService implements BoardService{
 		return result;
 	}
 
+	public int setBoardFileDelete(Long fileNum)throws Exception{
+		//HDD에 파일 삭제
+		return qnaDAO.setBoardFileDelete(fileNum);
+		
+	}
 
 
 }

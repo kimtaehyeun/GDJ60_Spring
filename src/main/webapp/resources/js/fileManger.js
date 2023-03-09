@@ -57,29 +57,88 @@ $("#fileAdd").click(()=>{
 });
 
 $(".deleteCheck").click(function(e){
-    if($(this).prop('checked')){
-        let result  = confirm("파일이 영구 삭제 됩니다.")
-        if(result){
-            count--;
-        }
-        else{
-            $(this).prop("checked",false);
-        }
-    }
-    else{
-        if(count>=max){
-            //위에 지우기
-            //  let id= $(".dels").attr("data-dels-id");
-            //  $("#"+id).remove();
-            //아래 지우기
-            console.log("dex : ",idx)
-            idx--;
-            $("#f"+(idx)).remove();
-             return;
-        }
-        count++;
+    let result  = confirm("파일이 영구 삭제 됩니다.")
+    let ch =$(this);
+    if(result){
+        let fileNum = $(this).val();
+        $.ajax({
+            type:"POST",
+            url:"./boardFileDelete",
+            data:{
+                fileNum:fileNum
+            },
+            success : function(response){
+                if(response.trim()>0){
+                    alert("삭제되었습니다.")
+                    ch.parent().parent().remove();
+                    //this : ajax객체 자기자신
+                    console.log($(ch))
+                    count--;
+                }else{
+                    alert("삭제 실패하였습니다.")
+                }
+            },
+            error:function(){
+
+            }
+        })
+        //-------fetch : GET-------
+
+        // fetch("URL?p=1",{
+        //     method:'GET'
+        // }).then(response=>response.text())
+        // .then((res)=>{
+        //     //
+        // })
+        //---JqueryAjax : GET--------------------
+        // $.get("URL?p=1", function(response){
+        //
+        // })
+
+        //------fetch : POST---------
+        // fetch("URL",{
+        //     method:"POST",
+        //     headers:{
+        //         "contents -type":"X,,,"
+        //     },
+        //     body:"p=1"
+        // }).then((response)=>response.text)
+        // .then((res)=>{
+        // })
+        
+        //---JqueryAjax : POST--------------------
+        // $.post("URL",{p:1},function(res){
+        // })
+        //---JqueryAjax : 통합요청--------------------
+
+    }else{
+        $(this).prop('checked',false)
     }
 })
+// $(".deleteCheck").click(function(e){
+//     if($(this).prop('checked')){
+//         let result  = confirm("파일이 영구 삭제 됩니다.")
+//         if(result){
+//             count--;
+//         }
+//         else{
+//             $(this).prop("checked",false);
+//         }
+//     }
+//     else{
+//         if(count>=max){
+//             //위에 지우기
+//             //  let id= $(".dels").attr("data-dels-id");
+//             //  $("#"+id).remove();
+//             //아래 지우기
+//             console.log("dex : ",idx)
+//             idx--;
+//             $("#f"+(idx)).remove();
+//              return;
+//         }
+//         count++;
+//     }
+// })
 
 // fileAdd.addEventListener("click", function(){
 
