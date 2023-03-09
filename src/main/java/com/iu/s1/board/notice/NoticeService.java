@@ -78,5 +78,12 @@ public class NoticeService implements BoardService {
 		// TODO Auto-generated method stub
 		return noticeDAO.getBoardFileDetail(boardFileDTO);
 	}
+
+	@Override
+	public int setBoardUpdate(BbsDTO bbsDTO, MultipartFile[] multipartFiles, HttpSession session, Long[] fileNums)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }

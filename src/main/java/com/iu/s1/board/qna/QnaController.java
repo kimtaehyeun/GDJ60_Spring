@@ -53,12 +53,11 @@ public class QnaController {
 		return mv;
 	}
 	@PostMapping("add")
-	public ModelAndView setBoardAdd(QnaDTO qnaDTO, ModelAndView mv, MultipartFile [] files, HttpSession session)throws Exception{
-		int result = qnaService.setBoardAdd(qnaDTO, files, session);
+	public ModelAndView setBoardAdd(QnaDTO qnaDTO, ModelAndView mv, MultipartFile [] addFiles, HttpSession session)throws Exception{
+		int result = qnaService.setBoardAdd(qnaDTO, addFiles, session);
 		String message="실패";
 		if(result>0) {
 			message="성공";
-			
 		}
 		mv.addObject("url","./list");
 		mv.addObject("result", message);
@@ -110,16 +109,25 @@ public class QnaController {
 	@GetMapping("fileDown")
 	public ModelAndView getFileDown(ModelAndView mv, BoardFileDTO boardFileDTO) throws Exception{
 		boardFileDTO= qnaService.getBoardFileDetail(boardFileDTO);
-		
 		mv.addObject("boardFile", boardFileDTO);
 		mv.setViewName("fileDownView");
 		return mv;
 	}
+	
 	@GetMapping("update")
 	public ModelAndView setBoardUpdate(ModelAndView mv,BoardDTO boardDTO) throws Exception{
 		boardDTO= qnaService.getBoardDetail(boardDTO);
 		mv.addObject("dto",boardDTO);
 		mv.setViewName("board/update");
+		return mv;
+	}
+	@PostMapping("update")
+	public ModelAndView setBoardUpdate(ModelAndView mv,BoardDTO boardDTO, MultipartFile [] addFiles, HttpSession session,Long [] fileNum) throws Exception{
+		int result =qnaService.setBoardUpdate(boardDTO, addFiles, session, fileNum);
+		mv.setViewName("common/result");
+		mv.addObject("result","수정 성공");
+		mv.addObject("url", "./list");
+		
 		return mv;
 	}
 	//------------------------------------------------------------------------------------------------------------------------
