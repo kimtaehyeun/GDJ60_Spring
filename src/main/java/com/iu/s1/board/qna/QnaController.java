@@ -1,24 +1,24 @@
 package com.iu.s1.board.qna;
 
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-
+import org.springframework.http.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s1.board.BbsDTO;
 import com.iu.s1.board.BoardDTO;
 import com.iu.s1.board.BoardFileDTO;
-import com.iu.s1.board.BoardService;
 import com.iu.s1.util.Pager;
 
 @Controller
@@ -42,6 +42,14 @@ public class QnaController {
 		
 		mv.addObject("list", ar);
 		mv.setViewName("board/list");
+		
+//		RestTemplate restTemplate = new RestTemplate();
+//		//url, method, parameter, header
+//		String result =restTemplate.getForObject("https://dummyjson.com/products/1", String.class);
+////		System.out.println(result);
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.add(, result)
+//		
 		
 		return mv;
 	}

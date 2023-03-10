@@ -12,17 +12,23 @@
 	<c:import url="../template/header.jsp"></c:import>
 	<div class="container-fluid my-5">
 		<div class="row mb-4">
-			<h2 class="col-5 mx-auto text-center border border-dark pb-3 ">login page</h2>
+			<h2 class="col-5 mx-auto text-center border border-dark pb-3 ">login
+				page</h2>
 		</div>
 		<div class="row">
 			<form action="./memberLogin" method="post" class="col-5 mx-auto">
 				<div class="mb-3">
 					<label class="form-label">ID</label> <input type="text"
-						class="form-control" name="id" placeholder="ID입력">
+						class="form-control" name="id" value="${cookie.rememberId.value}" placeholder="ID입력">
 				</div>
 				<div class="mb-3">
 					<label class="form-label">PW</label> <input type="password"
 						class="form-control" name="pw">
+				</div>
+				<div class="mb-3">
+					<input type="checkbox" name="remember" class="form-check-input"
+						id="remember" value="remember"> <label class="form-check-label"
+						for="remember">id기억하기</label>
 				</div>
 				<button type="submit" class="btn btn-primary">Login</button>
 			</form>

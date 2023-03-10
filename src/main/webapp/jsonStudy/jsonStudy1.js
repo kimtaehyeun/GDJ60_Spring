@@ -2,10 +2,28 @@ $("#btn").click(()=>{
 
     let productId = $("#productId").val();
 
-    $.get("https://dummyjson.com/products/"+productId,function(response){
-        console.log(response);
-        console.log(response.title)
+    $.ajax({
+        type:'GET',
+        url:"https://dummyjson.com/products/"+productId,
+        success:function(response){
+            console.log(response);
+            console.log(typeof response);
+
+            response=JSON.parse(response);
+        }
     });
+
+
+    // $.get("https://dummyjson.com/products/"+productId,function(response){
+    //     console.log(response);
+    //     console.log(response.title);
+    //     console.log("타입 : " +typeof response)
+    //     alert(response);
+    //     let result = JSON.stringify(response);
+    //     console.log(result);
+    //     alert(result);
+    //     console.log(result.title)
+    // });
 })
 $.get("https://dummyjson.com/products",function(response){
     // console.log(response.products.length);
